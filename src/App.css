@@ -1,4 +1,32 @@
 .App {
   margin: 1rem;
   font-family: Arial, Helvetica, sans-serif;
+  text-align:center;
+}
+.App div {
+  height: 50px;
+  line-height: 50px;
+  border: solid 2px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+div.classicFunction {
+  border-color: blue;
+  background-color: lightblue;
+}
+
+div.arrowFunction {
+  border-color: green;
+  background-color: lightgreen;
+}
+
+div.simpleComponent {
+  border-color: orange;
+  background-color: lightyellow;
+}
+
+div.pureComponent {
+  border-color: red;
+  background-color: lightcoral;
 }

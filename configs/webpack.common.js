@@ -7,13 +7,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
    output: {
      filename: 'bundle.js',
      path: paths.build,
+     publicPath: '/',
    },
     module: {
       rules: [
         {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
-          use: ["babel-loader"]
+          use: ["babel-loader","eslint-loader"]
         },
         {
           test: /\.css$/,
@@ -21,12 +22,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
         }
       ]
     },
+    resolve: {
+      extensions: ['*', '.js', '.jsx'],
+    },
    plugins: [
+     new CleanWebpackPlugin(),
      new HtmlWebpackPlugin({
        title: 'webpack Boilerplate',
        template: paths.src + '/templates/template.html',
-       filename: 'index.html',
+       favicon: paths.src + '/images/favicon.png',
+       filename: 'index.html'
      }),
-     new CleanWebpackPlugin()
    ],
  };

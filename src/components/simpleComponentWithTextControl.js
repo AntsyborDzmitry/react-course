@@ -1,29 +1,33 @@
 import React from 'react';
-import {calculateCounterState, colors} from '../utilities/textControlUtilities.js';
+import { calculateCounterState, colors } from '../utilities/textControlUtilities';
 
 export default class SimpleComponentWithTextControl extends React.Component {
-  constructor(props){
-        super(props);
-        this.state={
-            textDisplay: false,
-            counter: 0
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      textDisplay: false,
+      counter: 0,
+    };
+  }
 
-  toggleButton(){
+  toggleButton() {
     this.setState((currentState) => ({
       textDisplay: !currentState.textDisplay,
-      counter : calculateCounterState(this.state, colors.length)
+      counter: calculateCounterState(currentState, colors.length),
     }));
   }
 
   render() {
-      const colorSchema = [...colors].reverse();
-    return ( <div className={colorSchema[this.state.counter]}>
-         <button onClick={() => this.toggleButton()}>
-           {this.state.textDisplay ? "hide" : "show"}
-         </button>
-         <span>{this.state.textDisplay && this.props.text}</span>
-     </div>)
+    const colorSchema = [...colors].reverse();
+    const { counter, textDisplay } = this.state;
+    const { text } = this.props;
+    return (
+      <div className={colorSchema[counter]}>
+        <button type="button" onClick={() => this.toggleButton()}>
+          {textDisplay ? 'hide' : 'show'}
+        </button>
+        <span>{textDisplay && text}</span>
+      </div>
+    );
   }
 }

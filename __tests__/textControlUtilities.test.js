@@ -1,4 +1,5 @@
 import { calculateCounterState } from '../src/utilities/textControlUtilities';
+
 describe("Testing of the calculateCounterState function", () => {
   const counterLimit = 5;
 

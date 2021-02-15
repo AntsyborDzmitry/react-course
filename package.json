@@ -6,11 +6,11 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --config configs/webpack.prod.js",
-    "start": "webpack serve --config configs/webpack.dev.js",
+    "start": "webpack serve --config configs/webpack.dev.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/AntsyborDzmitry/react-course.git",
+    "url": "git+ssh://git@github.com/AntsyborDzmitry/react-course.git"
   },
   "keywords": [
     "react"

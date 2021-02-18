@@ -1,14 +1,17 @@
-import './styles/app.css';
+import './styles/libs/bootstrap-grid.min.css';
+import './styles/index.scss';
 import React from 'react';
-import FunctionalComponent from './components/functionalComponentWithTextControl';
-import SimpleComponent from './components/simpleComponentWithTextControl';
+
+import Header from './components/header';
+import Content from './components/content';
+import Footer from './components/footer';
 
 function App() {
   return (
     <div className="App">
-      <h1>React home task №2</h1>
-      <FunctionalComponent text="Hello I'm classic functional component !" />
-      <SimpleComponent text="Hello I'm  class based component !" />
+      <Header />
+      <Content />
+      <Footer />
     </div>
   );
 }

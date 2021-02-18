@@ -1,0 +1,118 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  //margin-top: 100px;
+  background-color: #232323;
+  font-family: sans-serif;
+  font-size: 14px;
+  border-bottom: solid #555555 3px;
+}
+
+.categories-bar {
+  display: flex;
+  color: white;
+  text-transform: uppercase;
+  padding: 20px 0 0 20px;
+  margin-bottom: -3px;
+}
+.categories-bar div {
+  padding: 0 5px 0 5px;
+}
+.categories-bar .active {
+  border-bottom: solid #F65261 3px;
+}
+.sort-bar {
+  display: flex;
+  }
+.sort-title {
+ color: #9a9a9a;
+ width: 115px;
+ text-transform: uppercase;
+ margin: auto;
+}
+
+/* select dropdown */
+
+.custom-select-wrapper {
+     position: relative;
+     user-select: none;
+     width: 100%;
+}
+ .custom-select {
+     position: relative;
+     display: flex;
+     flex-direction: column;
+}
+ .custom-select__trigger {
+     position: relative;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0 22px;
+     font-size: 20px;
+     font-weight: 300;
+     text-transform: uppercase;
+     color: white;
+     height: 55px;
+     line-height: 55px;
+     background-color: #232323;
+     border: none;
+     font-family: sans-serif;
+     font-size: 14px;
+}
+ .custom-options {
+     position: absolute;
+     display: block;
+     top: 100%;
+     left: 0;
+     right: 0;
+     border: 2px solid #394a6d;
+     border-top: 0;
+     background: #fff;
+     opacity: 0;
+     visibility: hidden;
+     pointer-events: none;
+     z-index: 2;
+     text-transform: uppercase;
+     font-size: 12px;
+}
+ .custom-select.open .custom-options {
+     opacity: 1;
+     visibility: visible;
+     pointer-events: all;
+}
+ .custom-option {
+     position: relative;
+     display: block;
+     padding: 0 22px 0 22px;
+     color: #3b3b3b;
+     line-height: 60px;
+     cursor: pointer;
+     transition: all 0.5s;
+}
+ .custom-option:hover {
+     cursor: pointer;
+     background-color: #b2b2b2;
+}
+.custom-option.selected {
+     color: #ffffff;
+     background-color: #305c91;
+}
+.arrow {
+  position: relative;
+  height: 15px;
+  width: 15px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #F65261;
+}
+.open .arrow{
+   width: 0;
+   height: 0;
+   border-left: 5px solid transparent;
+   border-right: 5px solid transparent;
+   border-bottom: 5px solid #F65261;
+     border-top: none;
+}

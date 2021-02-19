@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../styles/common/logo.scss';
 
 export default function logo(props) {
   const { logoLink } = props;

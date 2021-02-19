@@ -1,0 +1,16 @@
+
+.categories-bar {
+  display: flex;
+  color: white;
+  text-transform: uppercase;
+  padding: 20px 0 0 20px;
+  margin-bottom: -3px;
+
+  div {
+    padding: 0 5px 0 5px;
+  }
+
+ .active {
+    border-bottom: solid #F65261 3px;
+  }
+}

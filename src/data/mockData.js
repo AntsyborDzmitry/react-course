@@ -1,4 +1,6 @@
-export const searchResultNumber = 30;
+export const searchResultNumber = '30';
+
+export const categories = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
 export const movies = [
   {

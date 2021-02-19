@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../../styles/navigation/categoriesBar.scss';
 
 export default function categoriesBar(props) {
   const { categories } = props;

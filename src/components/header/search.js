@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './button';
+import Button from '../common/button';
+import '../../styles/header/search.scss';
 
 export default function search(props) {
   const { searchTitle, searchPlaceholder } = props;
@@ -10,7 +11,7 @@ export default function search(props) {
       <div className="search-title">{searchTitle}</div>
       <div className="search-input">
         <input type="text" placeholder={searchPlaceholder} />
-        <Button title="search" />
+        <Button cssClass="" title="search" />
       </div>
     </div>
   );

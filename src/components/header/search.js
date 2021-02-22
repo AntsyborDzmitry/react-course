@@ -21,3 +21,8 @@ search.propTypes = {
   searchTitle: PropTypes.string.isRequired,
   searchPlaceholder: PropTypes.string.isRequired,
 };
+
+search.defaultProps = {
+  searchTitle: 'Search',
+  searchPlaceholder: 'Type here ...',
+};

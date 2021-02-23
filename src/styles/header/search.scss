@@ -1,3 +1,5 @@
+@import '../vars';
+
 .search {
   display: flex;
   flex-direction: column;
@@ -25,16 +27,7 @@
     padding-left: 14px;
   }
 
-  button {
-    height: 41px;
-    background-color: #F65261;
-    border: none;
-    color: white;
-    width: 146px;
-    text-transform: uppercase;
-  }
-
   input::placeholder {
-    color: #F65261;
+    color: $netflix-pink;
   }
 }

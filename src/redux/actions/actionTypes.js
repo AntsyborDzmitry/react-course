@@ -1,0 +1,7 @@
+const SHOW_MODAL = 'SHOW-MODAL';
+const HIDE_MODAL = 'HIDE-MODAL';
+
+export {
+  SHOW_MODAL,
+  HIDE_MODAL,
+};

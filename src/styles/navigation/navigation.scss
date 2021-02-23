@@ -1,7 +1,9 @@
+@import '../vars';
+
 .navigation {
   display: flex;
   justify-content: space-between;
-  background-color: #232323;
+  background-color: $netflix-background-color;
   font-family: sans-serif;
   font-size: 14px;
   border-bottom: solid #555555 3px;

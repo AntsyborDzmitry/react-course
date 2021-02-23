@@ -1,3 +1,5 @@
+@import '../vars';
+
 .logo {
   z-index: 2;
   padding: 20px 0 0 50px;
@@ -5,7 +7,7 @@
 
   a {
     text-decoration: none;
-    color: #F65261;
+    color: $netflix-pink;
     font-size: 0px;
     font-family: monospace;
   }

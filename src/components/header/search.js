@@ -11,7 +11,7 @@ export default function search(props) {
       <div className="search-title">{searchTitle}</div>
       <div className="search-input">
         <input type="text" placeholder={searchPlaceholder} />
-        <Button cssClass="" title="search" />
+        <Button cssClass="search-button" title="search" />
       </div>
     </div>
   );

@@ -13,17 +13,20 @@ button.add-film {
   font-size: 15px;
   text-transform: uppercase;
 }
+
 .bottom.wrapper {
   display: flex;
   justify-content: flex-end;
 }
-.search-input  button, button.submit  {
-    height: 41px;
-    background-color: $netflix-pink;
-    border: none;
-    color: white;
-    width: 146px;
-    text-transform: uppercase;
+
+button.search-button,
+button.submit {
+  height: 41px;
+  background-color: $netflix-pink;
+  border: none;
+  color: white;
+  width: 146px;
+  text-transform: uppercase;
 }
 
 button.reset {
@@ -36,12 +39,13 @@ button.reset {
 }
 
 button {
-  &.reset, &.submit {
+  &.reset,
+  &.submit {
     border-radius: 7px;
   }
 }
 
-.search-input  button,
- button.add-film {
+button.search-button,
+button.add-film {
   border-radius: 3px;
 }

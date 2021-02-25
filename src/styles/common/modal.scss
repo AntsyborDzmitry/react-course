@@ -4,22 +4,22 @@
   position: fixed;
   top: 0;
   left: 0;
-  width:100%;
+  width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
   z-index: 3;
 }
 
 .modal-main {
-  position:fixed;
+  position: fixed;
   display: flex;
   flex-direction: column;
   background: $netflix-background-color;
   width: 60%;
   height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   .close.top {
     font-size: 30px;
@@ -35,7 +35,7 @@
     display: flex;
     padding: 10px 65px 30px;
 
-    .modal-title{
+    .modal-title {
       text-transform: uppercase;
       margin: 0 0 10px 0;
       color: white;
@@ -43,7 +43,7 @@
       font-family: sans-serif;
     }
 
-    .bottom.wrapper button{
+    .bottom.wrapper button {
       margin-left: 10px;
     }
 
@@ -55,7 +55,8 @@
       font-family: monospace;
     }
 
-    input, select {
+    input,
+    select {
       width: 100%;
       background-color: #424242;
       border: none;
@@ -64,6 +65,7 @@
       height: 45px;
       color: white;
     }
+
     select::placeholder,
     select option:first-child,
     input::placeholder {

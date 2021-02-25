@@ -7,7 +7,7 @@
     "test": "jest",
     "eslint": "eslint src",
     "eslint:fix": "npm run eslint -- --fix",
-    "stylelint": "stylelint src",
+    "stylelint": "stylelint src/styles/",
     "stylelint:fix": "npm run stylelint -- --fix",
     "build": "webpack --config configs/webpack.prod.js",
     "start": "webpack serve --config configs/webpack.dev.js"

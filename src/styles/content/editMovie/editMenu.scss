@@ -22,7 +22,7 @@
     &:first-child {
       text-align: end;
       padding-right: 9px;
-      margin-top: 0px;
+      margin-top: 0;
     }
 
     &:last-child {
@@ -35,6 +35,7 @@
       background-color: $netflix-pink;
     }
   }
+
   span {
     padding-left: 5px;
     cursor: pointer;

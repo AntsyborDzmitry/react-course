@@ -17,9 +17,9 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    /* new StylelintPlugin({
-     configFile: '.stylelintrc',
-     }), */
+    new StylelintPlugin({
+      configFile: '.stylelintrc',
+    }),
   ],
   optimization: {
     minimize:false,

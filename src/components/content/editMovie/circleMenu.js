@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import '../../../styles/content/editMovie/editButton.scss';
 
 export default function circleMenu(props) {
-  const { externalRef } = props;
+  const { stateHandler } = props;
 
-  const openEditMenu = () => {
-    externalRef.current.classList.remove('display-none');
+  const openMenu = (cssClass) => () => {
+    stateHandler(cssClass);
   };
 
   return (
-    <div className="circle" ref={externalRef} onClick={openEditMenu}>
+    <div className="circle" onClick={openMenu('')}>
       <div />
       <div />
       <div />
@@ -19,10 +19,5 @@ export default function circleMenu(props) {
 }
 
 circleMenu.propTypes = {
-  externalRef: PropTypes.shape({
-    current: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]),
-  }).isRequired,
+  stateHandler: PropTypes.func,
 };

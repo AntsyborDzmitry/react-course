@@ -3,12 +3,17 @@ import PropTypes from 'prop-types';
 import '../../../styles/content/editMovie/editMenu.scss';
 
 export default function editMenu(props) {
-  const { modalDeleteId, modalEditId, selfRef } = props;
+  const {
+    modalDeleteId,
+    modalEditId,
+    displayCssClass,
+    stateHandler,
+  } = props;
 
   const handleExternalClick = (e) => {
     const { classList } = e.target;
     if (!classList.contains('edit-menu') && !classList.contains('circle')) {
-      selfRef.current.classList.add('display-none');
+      stateHandler('display-none');
     }
   };
 
@@ -19,21 +24,15 @@ export default function editMenu(props) {
     };
   }, []);
 
-  const closeMenu = () => { selfRef.current.classList.add('display-none'); };
-
-  const openEditModal = () => {
-    document.querySelector(`#${modalEditId}`).classList.remove('display-none');
-  };
-
-  const openDeleteModal = () => {
-    document.querySelector(`#${modalDeleteId}`).classList.remove('display-none');
+  const openModal = (modalId) => () => {
+    document.querySelector(`#${modalId}`).classList.remove('display-none');
   };
 
   return (
-    <div className="edit-menu display-none" ref={selfRef}>
-      <div><span onClick={closeMenu}>x</span></div>
-      <div onClick={openEditModal}>Edit</div>
-      <div onClick={openDeleteModal}>Delete</div>
+    <div className={`edit-menu ${displayCssClass}`}>
+      <div><span>x</span></div>
+      <div onClick={openModal(modalEditId)}>Edit</div>
+      <div onClick={openModal(modalDeleteId)}>Delete</div>
     </div>
   );
 }
@@ -41,10 +40,6 @@ export default function editMenu(props) {
 editMenu.propTypes = {
   modalDeleteId: PropTypes.string.isRequired,
   modalEditId: PropTypes.string.isRequired,
-  selfRef: PropTypes.shape({
-    current: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.node),
-      PropTypes.node,
-    ]),
-  }).isRequired,
+  displayCssClass: PropTypes.string,
+  stateHandler: PropTypes.func,
 };

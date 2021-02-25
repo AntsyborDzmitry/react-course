@@ -1,16 +1,25 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CircleMenu from './circleMenu';
 import EditMenu from './editMenu';
 
 export default function editMovie(props) {
   const { modalDeleteId, modalEditId } = props;
-  const editMenuRef = useRef();
+  const [editMenuCssClass, setEditMenuCssClass] = useState('display-none');
+
+  const showEditMenu = (state) => {
+    setEditMenuCssClass(state);
+  };
 
   return (
     <>
-      <CircleMenu externalRef={editMenuRef} />
-      <EditMenu selfRef={editMenuRef} modalDeleteId={modalDeleteId} modalEditId={modalEditId} />
+      <CircleMenu stateHandler={showEditMenu} />
+      <EditMenu
+        displayCssClass={editMenuCssClass}
+        modalDeleteId={modalDeleteId}
+        modalEditId={modalEditId}
+        stateHandler={showEditMenu}
+      />
     </>
   );
 }

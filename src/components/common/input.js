@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/common/input.scss';
 
 export default function input(props) {
   const {
-    inputId,
     inputType,
     inputName,
     labelTitle,
@@ -13,27 +12,41 @@ export default function input(props) {
     changeListener,
   } = props;
 
+  const inputRef = useRef();
   const defaultDateTypeChangeListener = () => {
-    const inputElem = document.querySelector(`#${inputId}`);
+    const inputElem = inputRef.current;
     inputElem.className = (inputElem.value !== '' ? 'has-value' : '');
   };
+  const resetDatePlaceholder = () => inputRef.current.classList.remove('has-value');
+
+  useEffect(() => {
+    const form = inputRef.current.closest('form');
+    if (inputType === 'date') {
+      form?.addEventListener('reset', resetDatePlaceholder);
+    }
+    return () => {
+      form?.removeEventListener('reset', resetDatePlaceholder);
+    };
+  });
+
   return (
     <>
-      <label htmlFor={inputId}>{labelTitle}</label>
-      <input
-        type={inputType}
-        id={inputId}
-        name={inputName}
-        placeholder={inputPlaceholder}
-        onChange={inputType === 'date' ? defaultDateTypeChangeListener : changeListener}
-        onClick={clickListener}
-      />
+      <label>
+        {labelTitle}
+        <input
+          type={inputType}
+          name={inputName}
+          placeholder={inputPlaceholder}
+          onChange={inputType === 'date' ? defaultDateTypeChangeListener : changeListener}
+          onClick={clickListener}
+          ref={inputRef}
+        />
+      </label>
     </>
   );
 }
 
 input.propTypes = {
-  inputId: PropTypes.string.isRequired,
   inputType: PropTypes.string.isRequired,
   inputName: PropTypes.string,
   labelTitle: PropTypes.string,

@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import '../../styles/content/searchResultNumber.scss';
 
 export default function searchResultNumber(props) {
-  const { resultNumber, title } = props;
+  const { resultNumber } = props;
 
   return (
     <div className="search-result-number">
       <span>{resultNumber}</span>
-      {title}
+      {' movies found'}
     </div>
   );
 }
 
 searchResultNumber.propTypes = {
   resultNumber: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
 };

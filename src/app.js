@@ -22,13 +22,13 @@ function App() {
       <ErrorBoundary errorMessage={errorMessage}>
         <Header>
           <HeaderMenu />
-          <Search searchTitle="find your movie" searchPlaceholder="What do you want to watch?" />
+          <Search />
         </Header>
       </ErrorBoundary>
       <ErrorBoundary errorMessage={errorMessage}>
         <Content>
           <Navigation />
-          <SearchResultNumber resultNumber={searchResultNumber} title=" movies found" />
+          <SearchResultNumber resultNumber={searchResultNumber} />
           <MovieList movies={movies} />
         </Content>
       </ErrorBoundary>

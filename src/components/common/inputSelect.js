@@ -4,38 +4,37 @@ import '../../styles/common/input.scss';
 
 export default function inputSelect(props) {
   const {
-    inputId,
     inputName,
     labelTitle,
     inputPlaceholder,
-    clickListener,
     changeListener,
+    clickListener,
     options,
   } = props;
 
   return (
     <>
-      <label htmlFor={inputId}>{labelTitle}</label>
-      <select
-        id={inputId}
-        name={inputName}
-        placeholder={inputPlaceholder}
-        onChange={changeListener}
-        onClick={clickListener}
-      >
-        <option hidden>{inputPlaceholder}</option>
-        {
-          options.map((item) => (
-            <option key={item} value={item}>{item}</option>
-          ))
-        }
-      </select>
+      <label>
+        {labelTitle}
+        <select
+          name={inputName}
+          placeholder={inputPlaceholder}
+          onChange={changeListener}
+          onClick={clickListener}
+        >
+          <option hidden>{inputPlaceholder}</option>
+          {
+            options.map((item) => (
+              <option key={item} value={item}>{item}</option>
+            ))
+          }
+        </select>
+      </label>
     </>
   );
 }
 
 inputSelect.propTypes = {
-  inputId: PropTypes.string.isRequired,
   inputName: PropTypes.string,
   labelTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,

@@ -56,6 +56,7 @@
     }
 
     input, select {
+      width: 100%;
       background-color: #424242;
       border: none;
       font-size: 17px;
@@ -71,3 +72,9 @@
   }
 }
 
+.confirmation-message {
+  color: white;
+  font-size: 17px;
+  font-family: monospace;
+  padding: 35px 0;
+}

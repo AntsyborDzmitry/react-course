@@ -2,6 +2,8 @@ export const searchResultNumber = '30';
 
 export const categories = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
+export const genreOptions = ['documentaries', 'comedies', 'action'];
+
 export const movies = [
   {
     link: 'images/image-1.png', title: 'Outside the war', year: '1991', genre: 'comedies',

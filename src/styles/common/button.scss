@@ -1,25 +1,23 @@
 @import '../vars';
 
-button.add-film {
-  z-index: 2;
-  height: 35px;
-  width: 141px;
-  margin: 20px 50px 0 0;
-  border: none;
-  color: $netflix-pink;
-  background-color: rgba(85, 85, 85, 0.58);
-  font-family: cursive;
-  font-weight: 500;
-  font-size: 15px;
-  text-transform: uppercase;
-}
+button {
+  cursor: pointer;
 
-.bottom.wrapper {
-  display: flex;
-  justify-content: flex-end;
+  &.reset,
+  &.submit,
+  &.confirm {
+    border-radius: 7px;
+  }
 }
 
 button.search-button,
+button.add-film {
+  border-radius: 3px;
+}
+
+button.search-button,
+button.confirm,
+button.save,
 button.submit {
   height: 41px;
   background-color: $netflix-pink;
@@ -38,14 +36,21 @@ button.reset {
   border-color: $netflix-pink;
 }
 
-button {
-  &.reset,
-  &.submit {
-    border-radius: 7px;
-  }
+button.add-film {
+  z-index: 2;
+  height: 35px;
+  width: 141px;
+  margin: 20px 50px 0 0;
+  border: none;
+  color: $netflix-pink;
+  background-color: rgba(85, 85, 85, 0.58);
+  font-family: cursive;
+  font-weight: 500;
+  font-size: 15px;
+  text-transform: uppercase;
 }
 
-button.search-button,
-button.add-film {
-  border-radius: 3px;
+.bottom.wrapper {
+  display: flex;
+  justify-content: flex-end;
 }

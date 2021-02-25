@@ -8,10 +8,12 @@ export default function movieItem(props) {
     link,
     year,
     genre,
+    children,
   } = props;
 
   return (
     <div className="col-6 col-sm-4 col-md-3">
+      {children}
       <img src={link} className="movie__img" alt={title} />
       <div className="movie-info">
         <div className="main-info">
@@ -29,4 +31,8 @@ movieItem.propTypes = {
   link: PropTypes.string.isRequired,
   year: PropTypes.string.isRequired,
   genre: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };

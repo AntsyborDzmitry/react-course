@@ -21,10 +21,12 @@
   input {
     width: 500px;
     height: 40px;
+    color: white;
     background-color: rgba(85, 85, 85, 0.58);
     border: none;
     font-size: 17px;
     padding-left: 14px;
+    margin-right: 10px;
   }
 
   input::placeholder {

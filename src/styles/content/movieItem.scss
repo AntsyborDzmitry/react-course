@@ -1,11 +1,21 @@
 .movie__img {
-    width: 100%;
-    height: 80%;
-    object-fit: cover;
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
 }
 
-.movie-list .row > div {
-  padding-bottom: 15px;
+.movie-list .row {
+  > div {
+    padding-bottom: 15px;
+
+    .circle {
+      visibility: hidden;
+    }
+  }
+
+  > div:hover .circle {
+    visibility: visible;
+  }
 }
 
 .movie-info {

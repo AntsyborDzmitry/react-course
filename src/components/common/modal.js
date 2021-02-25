@@ -1,19 +1,23 @@
 import React from 'react';
-import '../../styles/header/modal.scss';
+import '../../styles/common/modal.scss';
 import PropTypes from 'prop-types';
 
 export default function modal(props) {
   const {
-    visibilityState,
-    setHideModal,
     title,
+    modalId,
     children,
   } = props;
 
+  const hideModal = () => {
+    const modalEl = document.querySelector(`#${modalId}`);
+    modalEl.classList.add('display-none');
+    modalEl.closest('form').reset();
+  };
   return (
-    <div className={`modal ${visibilityState.visibilityState}`}>
+    <div id={modalId} className="modal display-none">
       <section className="modal-main">
-        <button type="button" className="top close" aria-label="Close" onClick={setHideModal}>
+        <button type="button" className="top close" aria-label="Close" onClick={hideModal}>
           <span aria-hidden="true">&times;</span>
         </button>
         <div className="modal-content">
@@ -26,9 +30,8 @@ export default function modal(props) {
 }
 
 modal.propTypes = {
-  visibilityState: PropTypes.shape({ visibilityState: PropTypes.string.isRequired }),
-  setHideModal: PropTypes.func.isRequired,
   title: PropTypes.string,
+  modalId: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,

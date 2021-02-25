@@ -5,9 +5,9 @@ import '../../styles/common/button.scss';
 export default function button(props) {
   const {
     cssClass,
+    type,
     title,
     clickListener,
-    type,
   } = props;
 
   return (

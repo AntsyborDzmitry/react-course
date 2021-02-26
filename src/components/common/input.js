@@ -12,7 +12,7 @@ export default function input(props) {
     changeListener,
   } = props;
 
-  const inputRef = useRef();
+  const inputRef = useRef(null);
   const defaultDateTypeChangeListener = () => {
     const inputElem = inputRef.current;
     inputElem.className = (inputElem.value !== '' ? 'has-value' : '');
@@ -27,7 +27,7 @@ export default function input(props) {
     return () => {
       form?.removeEventListener('reset', resetDatePlaceholder);
     };
-  });
+  }, []);
 
   return (
     <>

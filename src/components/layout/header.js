@@ -8,7 +8,6 @@ export default function header(props) {
   return (
     <div className="header">
       {children}
-      <div className="concord-img-gradient" />
     </div>
   );
 }

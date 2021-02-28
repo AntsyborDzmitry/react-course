@@ -1,0 +1,87 @@
+@import '../vars';
+
+.movie-details {
+  display: none;
+}
+
+.movie-details.movie-details-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  top: 0;
+  padding: 0 20px 40px 40px;
+  color: white;
+  background-color: black;
+  opacity: 0.9;
+  z-index: 2;
+
+  .logo {
+    padding-left: 0;
+  }
+
+  .movie-details-header {
+    display: flex;
+    justify-content: space-between;
+
+    .search-icon-wrapper {
+      padding: 15px 10px 0 10px;
+    }
+  }
+
+  .movie-details-content {
+    display: flex;
+    padding-top: 25px;
+  }
+
+  .details {
+    padding: 0 45px;
+
+    .title {
+      font-size: 45px;
+      font-family: sans-serif;
+    }
+
+    .rating {
+      display: inline-block;
+      vertical-align: bottom;
+      width: 51px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 23px;
+      border: 1px solid white;
+      color: green;
+      line-height: 47px;
+      margin-left: 20px;
+      font-family: serif;
+    }
+
+    .year {
+      padding: 10px 56px 25px 10px;
+      color: $netflix-pink;
+      font-size: 25px;
+      font-family: monospace;
+    }
+
+    .duration {
+      padding-left: 25px;
+    }
+
+    .description {
+      font-size: 14px;
+      font-family: monospace;
+    }
+  }
+
+  img {
+    width: 17%;
+
+    @media only screen and (max-width: 768px) {
+      width: 28%;
+    }
+
+    @media only screen and (max-width: 481px) {
+      width: 40%;
+    }
+  }
+}

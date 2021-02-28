@@ -6,7 +6,7 @@ import EditForm from './editMovie/editForm';
 import DeleteForm from './editMovie/deleteForm';
 
 export default function movieList(props) {
-  const { movies } = props;
+  const { movies, selectedMovieHandler, movieDetailsVisibilityHandler } = props;
   const modalEditId = 'edit_movie_modal';
   const modalDeleteId = 'delete_movie_modal';
 
@@ -17,10 +17,9 @@ export default function movieList(props) {
           movies.map((item) => (
             <MovieItem
               key={item.title}
-              title={item.title}
-              link={item.link}
-              year={item.year}
-              genre={item.genre}
+              movie={item}
+              selectedMovieHandler={selectedMovieHandler}
+              movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
             >
               <EditMovie modalDeleteId={modalDeleteId} modalEditId={modalEditId} />
             </MovieItem>
@@ -34,12 +33,16 @@ export default function movieList(props) {
 }
 
 movieList.propTypes = {
+  selectedMovieHandler: PropTypes.func,
+  movieDetailsVisibilityHandler: PropTypes.func,
   movies: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      link: PropTypes.string.isRequired,
-      year: PropTypes.string.isRequired,
-      genre: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      imageLink: PropTypes.string,
+      year: PropTypes.string,
+      duration: PropTypes.string,
+      description: PropTypes.string,
+      rating: PropTypes.string,
     }),
   ),
 };

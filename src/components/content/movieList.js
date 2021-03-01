@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
@@ -10,21 +10,23 @@ export default function movieList(props) {
   const modalEditId = 'edit_movie_modal';
   const modalDeleteId = 'delete_movie_modal';
 
+  const itemsBuilder = (item) => (
+    <MovieItem
+      key={item.title}
+      movie={item}
+      selectedMovieHandler={selectedMovieHandler}
+      movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
+    >
+      <EditMovie modalDeleteId={modalDeleteId} modalEditId={modalEditId} />
+    </MovieItem>
+  );
+
+  const items = useMemo(() => movies.map(itemsBuilder), [movies]);
+
   return (
     <div className="movie-list">
       <div className="row">
-        {
-          movies.map((item) => (
-            <MovieItem
-              key={item.title}
-              movie={item}
-              selectedMovieHandler={selectedMovieHandler}
-              movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
-            >
-              <EditMovie modalDeleteId={modalDeleteId} modalEditId={modalEditId} />
-            </MovieItem>
-          ))
-        }
+        {items}
       </div>
       <EditForm modalId={modalEditId} />
       <DeleteForm modalId={modalDeleteId} />

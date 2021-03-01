@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../common/logo';
-import SearchElement from '../common/searchElement';
+import SearchIconElement from '../common/searchIconElement';
 import '../../styles/header/movieDetails.scss';
-import '../../styles/common/searchElement.scss';
+import '../../styles/common/searchIconElement.scss';
 
 export default function movieDetails(props) {
   const {
@@ -20,7 +20,7 @@ export default function movieDetails(props) {
       <div className={`movie-details ${visibilityState}`}>
         <div className="movie-details-header">
           <Logo logoLink="my-test-site.com" />
-          <SearchElement clickListener={hideDetails} />
+          <SearchIconElement clickListener={hideDetails} />
         </div>
         <div className="movie-details-content">
           <img src={selectedMovie.imageLink} alt={selectedMovie.title} />

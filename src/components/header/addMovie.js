@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Button from '../common/button';
 import AddMovieForm from './addMovieForm';
 
@@ -10,7 +10,7 @@ export default function addMovie() {
   return (
     <>
       <AddMovieForm modalId={modalAddMovieId} />
-      <Button cssClass="add-film" title="+ add movie" clickListener={showModal} />
+      <Button cssClass="add-film" title="+ add movie" clickListener={useCallback(showModal, [])} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/common/input.scss';
 
@@ -12,6 +12,8 @@ export default function inputSelect(props) {
     options,
   } = props;
 
+  const itemsBuilder = (item) => (<option key={item} value={item}>{item}</option>);
+  const items = useMemo(() => options.map(itemsBuilder), [options]);
   return (
     <>
       <label>
@@ -23,11 +25,7 @@ export default function inputSelect(props) {
           onClick={clickListener}
         >
           <option hidden>{inputPlaceholder}</option>
-          {
-            options.map((item) => (
-              <option key={item} value={item}>{item}</option>
-            ))
-          }
+          {items}
         </select>
       </label>
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function searchElement(props) {
+export default function searchIconElement(props) {
   const {
     clickListener,
   } = props;
@@ -16,6 +16,6 @@ export default function searchElement(props) {
   );
 }
 
-searchElement.propTypes = {
+searchIconElement.propTypes = {
   clickListener: PropTypes.func,
 };

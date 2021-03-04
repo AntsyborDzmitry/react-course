@@ -1,18 +1,23 @@
-import { GET_MOVIE_LIST, SORT_MOVIE_BY } from './actionTypes';
-import { compareValues } from '../../utils/utils';
+import { GET_MOVIE_LIST, SORT_MOVIE_BY, GET_MOVIE_LIST_PENDING } from './actionTypes';
+import { compareValues, doApiCall } from '../../utils/utils';
 
-function fetchMovieList() {
-  // dispatch({ type: 'GET_MOVIE_LIST_PENDING', payload: data })
-  return (dispatch) => fetch('http://localhost:4000/movies')
-    .then((response) => response.json())
-    .then(
+function buildMovieList(filterKey = '', sortKey = 'release_date') {
+  const host = 'http://localhost:4000';
+  const url = '/movies';
+  const params = `?sortBy=${sortKey}&sortOrder=desc&searchBy=genres&filter=${filterKey}&limit=20`;
+
+  return (dispatch) => {
+    dispatch({ type: GET_MOVIE_LIST_PENDING, payload: false });
+    const response = doApiCall(`${host}${url}${params}`);
+    response.then(
       (data) => {
-        dispatch({ type: GET_MOVIE_LIST, payload: data.data });
+        if (data?.data) {
+          dispatch({ type: GET_MOVIE_LIST, payload: data.data });
+        }
       },
-    )
-    .catch((error) => {
-      console.error('Problem with getting movie data from server: ', error);
-    });
+    );
+    dispatch({ type: GET_MOVIE_LIST_PENDING, payload: true });
+  };
 }
 
 function sortMovieListBy(movieList, key) {
@@ -22,8 +27,8 @@ function sortMovieListBy(movieList, key) {
       list = [...movieList];
       list.sort(compareValues(key));
     }
-    return dispatch({ type: SORT_MOVIE_BY, payload: list });
+    return dispatch({ type: SORT_MOVIE_BY, payload: key });
   };
 }
 
-export { fetchMovieList, sortMovieListBy };
+export { buildMovieList, sortMovieListBy };

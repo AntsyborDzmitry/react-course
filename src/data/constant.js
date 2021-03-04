@@ -15,4 +15,10 @@ export const GENRE_OPTIONS = [
   { key: 'romance', value: 'Romance' },
 ];
 
-export const CATEGORIES = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+export const CATEGORIES = [
+  { key: '', value: 'all' },
+  { key: 'documentary', value: 'documentary' },
+  { key: 'comedy', value: 'comedy' },
+  { key: 'horror', value: 'horror' },
+  { key: 'crime', value: 'crime' },
+];

@@ -5,7 +5,7 @@ import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
 import EditForm from './editMovie/editForm';
 import DeleteForm from './editMovie/deleteForm';
-import { fetchMovieList } from '../../redux/actions/actionCreators';
+import { buildMovieList } from '../../redux/actions/actionCreators';
 
 function movieList(props) {
   const {
@@ -14,6 +14,7 @@ function movieList(props) {
     movieDetailsVisibilityHandler,
     setMovieList,
   } = props;
+
   const modalEditId = 'edit_movie_modal';
   const modalDeleteId = 'delete_movie_modal';
   useEffect(() => { setMovieList(); }, []);
@@ -59,7 +60,7 @@ movieList.propTypes = {
   setMovieList: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({ movies: state.movies });
-const mapDispatchToProps = { setMovieList: fetchMovieList };
+const mapStateToProps = (state) => { console.log('state from movieList ', state, Date.now()); return { movies: state.movies }; };
+const mapDispatchToProps = { setMovieList: buildMovieList };
 
 export default connect(mapStateToProps, mapDispatchToProps)(movieList);

@@ -26,4 +26,13 @@ function compareValues(key, order = 'asc') {
   };
 }
 
-export { getYearFromReleaseDate, compareValues };
+function doApiCall(url) {
+  return fetch(url)
+    .then(
+      (response) => response.json(),
+    ).catch((error) => {
+      console.error('Problem with getting data from server: ', error);
+    });
+}
+
+export { getYearFromReleaseDate, compareValues, doApiCall };

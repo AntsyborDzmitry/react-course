@@ -26,6 +26,20 @@ export default function dropDown(props) {
     }
   };
 
+  const buildSortOption = (item, ind) => {
+    const status = ind === 0 ? 'selected' : '';
+    return (
+      <span
+        key={item.key}
+        className={`custom-option ${status}`}
+        data-value={item.key}
+        onClick={chooseElementEvent}
+      >
+        {item.value}
+      </span>
+    );
+  };
+
   useEffect(() => {
     document.addEventListener('click', handleClick);
     return () => {
@@ -36,21 +50,12 @@ export default function dropDown(props) {
     <div className="custom-select-wrapper">
       <div className="custom-select" onClick={openMenuEvent}>
         <div className="custom-select__trigger">
-          <span />
+          <span>{options[0].value}</span>
           <div className="arrow" />
         </div>
         <div className="custom-options">
           {
-            options.map((item) => (
-              <span
-                key={item.key}
-                className="custom-option"
-                data-value={item.key}
-                onClick={chooseElementEvent}
-              >
-                {item.value}
-              </span>
-            ))
+            options.map((item, ind) => buildSortOption(item, ind))
           }
         </div>
       </div>

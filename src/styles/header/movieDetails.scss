@@ -57,7 +57,7 @@
     }
 
     .year {
-      padding: 10px 56px 25px 10px;
+      padding: 10px 56px 25px 0;
       color: $netflix-pink;
       font-size: 25px;
       font-family: monospace;
@@ -67,9 +67,14 @@
       padding-left: 25px;
     }
 
-    .description {
+    .description,
+    .tag {
       font-size: 14px;
       font-family: monospace;
+    }
+
+    .tag {
+      padding: 10px 0;
     }
   }
 

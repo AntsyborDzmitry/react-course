@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getYearFromReleaseDate } from '../../utils/utils';
 import '../../styles/content/movieItem.scss';
 
 export default function movieItem(props) {
@@ -20,13 +21,13 @@ export default function movieItem(props) {
   return (
     <div className="col-6 col-sm-4 col-md-3" onClick={setSelectedMovieAndShow}>
       {children}
-      <img src={movie.imageLink} className="movie__img" alt={movie.title} />
+      <img src={movie.poster_path} className="movie__img" alt={movie.title} />
       <div className="movie-info">
         <div className="main-info">
           <span className="title">{movie.title}</span>
-          <span className="year">{movie.year}</span>
+          <span className="year">{getYearFromReleaseDate(movie.release_date)}</span>
         </div>
-        <div className="genre">{movie.genre}</div>
+        <div className="genre">{movie.genres?.join(', ')}</div>
       </div>
     </div>
   );
@@ -35,11 +36,9 @@ export default function movieItem(props) {
 movieItem.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string,
-    imageLink: PropTypes.string,
-    year: PropTypes.string,
-    duration: PropTypes.string,
-    description: PropTypes.string,
-    rating: PropTypes.string,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string,
+    genres: PropTypes.arrayOf(PropTypes.string),
   }),
   selectedMovieHandler: PropTypes.func,
   children: PropTypes.oneOfType([

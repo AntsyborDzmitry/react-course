@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../common/logo';
 import SearchIconElement from '../common/searchIconElement';
+import { getYearFromReleaseDate } from '../../utils/utils';
 import '../../styles/header/movieDetails.scss';
 import '../../styles/common/searchIconElement.scss';
 
@@ -23,21 +24,22 @@ export default function movieDetails(props) {
           <SearchIconElement clickListener={hideDetails} />
         </div>
         <div className="movie-details-content">
-          <img src={selectedMovie.imageLink} alt={selectedMovie.title} />
+          <img src={selectedMovie.poster_path} alt={selectedMovie.title} />
           <div className="details">
             <div className="title">
               {selectedMovie.title}
-              <span className="rating">{selectedMovie.rating}</span>
+              <span className="rating">{selectedMovie.vote_average}</span>
             </div>
+            <div className="tag">{selectedMovie.tagline}</div>
             <div className="year">
-              {selectedMovie.year}
+              {getYearFromReleaseDate(selectedMovie.release_date)}
               <span className="duration">
-                {selectedMovie.duration}
+                {selectedMovie.runtime}
                 {' '}
                 min
               </span>
             </div>
-            <div className="description">{selectedMovie.description}</div>
+            <div className="description">{selectedMovie.overview}</div>
           </div>
         </div>
       </div>
@@ -48,11 +50,12 @@ export default function movieDetails(props) {
 movieDetails.propTypes = {
   selectedMovie: PropTypes.shape({
     title: PropTypes.string,
-    imageLink: PropTypes.string,
-    year: PropTypes.string,
-    duration: PropTypes.string,
-    description: PropTypes.string,
-    rating: PropTypes.string,
+    poster_path: PropTypes.string,
+    release_date: PropTypes.string,
+    tagline: PropTypes.string,
+    runtime: PropTypes.number,
+    overview: PropTypes.string,
+    vote_average: PropTypes.number,
   }),
   visibilityState: PropTypes.string,
   movieDetailsVisibilityHandler: PropTypes.func,

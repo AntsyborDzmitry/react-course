@@ -1,7 +1,4 @@
-const SHOW_MODAL = 'SHOW-MODAL';
-const HIDE_MODAL = 'HIDE-MODAL';
+const GET_MOVIE_LIST = 'GET_MOVIE_LIST';
+const SORT_MOVIE_BY = 'SORT_MOVIE_BY';
 
-export {
-  SHOW_MODAL,
-  HIDE_MODAL,
-};
+export { GET_MOVIE_LIST, SORT_MOVIE_BY };

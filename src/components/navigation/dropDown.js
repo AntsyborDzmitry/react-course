@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../../styles/navigation/dropDown.scss';
 
 export default function dropDown(props) {
-  const { options } = props;
+  const { options, sortMovieHandler } = props;
 
   const chooseElementEvent = (e) => {
     const { target } = e;
@@ -14,6 +14,7 @@ export default function dropDown(props) {
       }
       target.classList.add('selected');
       target.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = target.textContent;
+      sortMovieHandler(target.dataset.value);
     }
   };
 
@@ -31,7 +32,6 @@ export default function dropDown(props) {
       document.removeEventListener('click', handleClick);
     };
   }, []);
-
   return (
     <div className="custom-select-wrapper">
       <div className="custom-select" onClick={openMenuEvent}>
@@ -43,12 +43,12 @@ export default function dropDown(props) {
           {
             options.map((item) => (
               <span
-                key={item}
+                key={item.key}
                 className="custom-option"
-                data-value={item}
+                data-value={item.key}
                 onClick={chooseElementEvent}
               >
-                {item}
+                {item.value}
               </span>
             ))
           }
@@ -59,5 +59,11 @@ export default function dropDown(props) {
 }
 
 dropDown.propTypes = {
-  options: PropTypes.instanceOf(Array).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ),
+  sortMovieHandler: PropTypes.func,
 };

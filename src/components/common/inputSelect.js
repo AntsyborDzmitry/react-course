@@ -12,7 +12,7 @@ export default function inputSelect(props) {
     options,
   } = props;
 
-  const itemsBuilder = (item) => (<option key={item} value={item}>{item}</option>);
+  const itemsBuilder = (item) => (<option key={item.key} value={item.key}>{item.value}</option>);
   const items = useMemo(() => options.map(itemsBuilder), [options]);
   return (
     <>
@@ -38,5 +38,10 @@ inputSelect.propTypes = {
   inputPlaceholder: PropTypes.string,
   changeListener: PropTypes.func,
   clickListener: PropTypes.func,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ),
 };

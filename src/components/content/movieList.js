@@ -1,14 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
 import EditForm from './editMovie/editForm';
 import DeleteForm from './editMovie/deleteForm';
+import { fetchMovieList } from '../../redux/actions/actionCreators';
 
-export default function movieList(props) {
-  const { movies, selectedMovieHandler, movieDetailsVisibilityHandler } = props;
+function movieList(props) {
+  const {
+    movies,
+    selectedMovieHandler,
+    movieDetailsVisibilityHandler,
+    setMovieList,
+  } = props;
   const modalEditId = 'edit_movie_modal';
   const modalDeleteId = 'delete_movie_modal';
+  useEffect(() => { setMovieList(); }, []);
 
   const itemsBuilder = (item) => (
     <MovieItem
@@ -35,16 +43,23 @@ export default function movieList(props) {
 }
 
 movieList.propTypes = {
-  selectedMovieHandler: PropTypes.func,
-  movieDetailsVisibilityHandler: PropTypes.func,
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      imageLink: PropTypes.string,
-      year: PropTypes.string,
-      duration: PropTypes.string,
-      description: PropTypes.string,
-      rating: PropTypes.string,
+      poster_path: PropTypes.string,
+      release_date: PropTypes.string,
+      tagline: PropTypes.string,
+      runtime: PropTypes.number,
+      overview: PropTypes.string,
+      vote_average: PropTypes.number,
     }),
   ),
+  selectedMovieHandler: PropTypes.func,
+  movieDetailsVisibilityHandler: PropTypes.func,
+  setMovieList: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({ movies: state.movies });
+const mapDispatchToProps = { setMovieList: fetchMovieList };
+
+export default connect(mapStateToProps, mapDispatchToProps)(movieList);

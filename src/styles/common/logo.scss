@@ -1,3 +1,5 @@
+@import '../vars';
+
 .logo {
   z-index: 2;
   padding: 20px 0 0 50px;
@@ -5,8 +7,8 @@
 
   a {
     text-decoration: none;
-    color: #F65261;
-    font-size: 0px;
+    color: $netflix-pink;
+    font-size: 0;
     font-family: monospace;
   }
 
@@ -14,7 +16,7 @@
     font-size: 17px;
   }
 
- .prefix{
+  .prefix {
     font-family: cursive;
     font-weight: bold;
   }

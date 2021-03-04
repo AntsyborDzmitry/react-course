@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function categoryItem(props) {
+export default function filterItem(props) {
   const { category, activityStatus } = props;
 
   return (
@@ -11,7 +11,7 @@ export default function categoryItem(props) {
   );
 }
 
-categoryItem.propTypes = {
+filterItem.propTypes = {
   activityStatus: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
 };

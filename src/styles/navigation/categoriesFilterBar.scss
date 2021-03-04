@@ -1,3 +1,4 @@
+@import '../vars';
 
 .categories-bar {
   display: flex;
@@ -10,7 +11,7 @@
     padding: 20px 5px 0 5px;
   }
 
- .active {
-    border-bottom: solid #F65261 3px;
+  .active {
+    border-bottom: solid $netflix-pink 3px;
   }
 }

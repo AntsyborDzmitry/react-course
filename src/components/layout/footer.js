@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/layout/footer.scss';
 
 export default function footer(props) {
@@ -9,3 +10,10 @@ export default function footer(props) {
     </div>
   );
 }
+
+footer.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../../styles/layout/content.scss';
 
 export default function content(props) {
@@ -9,3 +10,10 @@ export default function content(props) {
     </div>
   );
 }
+
+content.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};

@@ -17,9 +17,6 @@ export default function dropDown(props) {
     }
   };
 
-  const getDropdownItem = (item) => (<span key={item} className="custom-option" data-value={item} onClick={chooseElementEvent}>{item}</span>);
-
-  const items = options.map((item) => getDropdownItem(item));
   const openMenuEvent = (e) => { e.currentTarget.classList.toggle('open'); };
   const handleClick = (e) => {
     const select = document.querySelector('.custom-select');
@@ -43,7 +40,18 @@ export default function dropDown(props) {
           <div className="arrow" />
         </div>
         <div className="custom-options">
-          {items}
+          {
+            options.map((item) => (
+              <span
+                key={item}
+                className="custom-option"
+                data-value={item}
+                onClick={chooseElementEvent}
+              >
+                {item}
+              </span>
+            ))
+          }
         </div>
       </div>
     </div>

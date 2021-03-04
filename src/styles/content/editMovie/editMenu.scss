@@ -1,0 +1,43 @@
+@import '../../vars';
+
+.edit-menu {
+  position: relative;
+  float: right;
+  top: 40px;
+  right: 90px;
+  color: white;
+  z-index: 2;
+
+  div {
+    position: absolute;
+    width: 125px;
+    height: 25px;
+    line-height: 25px;
+    margin-top: 25px;
+    padding-left: 15px;
+    background-color: $netflix-background-color;
+    font-size: 15px;
+    font-family: sans-serif;
+
+    &:first-child {
+      text-align: end;
+      padding-right: 9px;
+      margin-top: 0;
+    }
+
+    &:last-child {
+      height: 30px;
+      line-height: 30px;
+      margin-top: 50px;
+    }
+
+    &:not(:first-child):hover {
+      background-color: $netflix-pink;
+    }
+  }
+
+  span {
+    padding-left: 5px;
+    cursor: pointer;
+  }
+}

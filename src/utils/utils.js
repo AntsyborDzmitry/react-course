@@ -1,8 +1,10 @@
-function getYearFromReleaseDate(releaseDate) {
+import { HOST, URL } from '../data/constant';
+
+export function getYearFromReleaseDate(releaseDate) {
   return releaseDate?.length > 4 ? releaseDate.substr(0, 4) : releaseDate;
 }
 
-function compareValues(key, order = 'asc') {
+export function compareValues(key, order = 'asc') {
   return function innerSort(a, b) {
     if (!Object.prototype.hasOwnProperty.call(a, key)
      || !Object.prototype.hasOwnProperty.call(b, key)) {
@@ -26,13 +28,30 @@ function compareValues(key, order = 'asc') {
   };
 }
 
-function doApiCall(url) {
-  return fetch(url)
-    .then(
-      (response) => response.json(),
-    ).catch((error) => {
-      console.error('Problem with getting data from server: ', error);
-    });
+export function buildGetMovieListURL(filterKey = '', sortKey = 'release_date') {
+  const params = `?sortBy=${sortKey}&sortOrder=desc&searchBy=genres&filter=${filterKey}&limit=20`;
+  return `${HOST}${URL}${params}`;
 }
 
-export { getYearFromReleaseDate, compareValues, doApiCall };
+function parseNumberValueOrDefault(value, defaultValue) {
+  const parsedValue = parseFloat(value, 10);
+  return Number.isFinite(parsedValue) ? parsedValue : defaultValue;
+}
+
+export function getSerializedFormData(formData) {
+  const serializedData = Object.fromEntries(formData.entries());
+  serializedData.genres = [serializedData.genres];
+  if (!serializedData.tagline) {
+    serializedData.tagline = '-';
+  }
+  serializedData.runtime = parseNumberValueOrDefault(serializedData.runtime, 0);
+  serializedData.vote_count = parseNumberValueOrDefault(serializedData.vote_count, 0);
+  serializedData.vote_average = parseNumberValueOrDefault(serializedData.vote_average, 0);
+  serializedData.budget = parseNumberValueOrDefault(serializedData.budget, 0);
+  serializedData.revenue = parseNumberValueOrDefault(serializedData.revenue, 0);
+  if (serializedData.id) {
+    serializedData.id = parseNumberValueOrDefault(serializedData.id, '');
+  }
+
+  return serializedData;
+}

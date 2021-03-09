@@ -1,15 +1,15 @@
 import React, { useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { buildMovieList } from '../../redux/actions/actionCreators';
+import { loadMovieList } from '../../redux/actions/actionCreators';
 import FilterItem from './filterItem';
+import { FILTER_MOVIE_BY } from '../../redux/actions/actionTypes';
 import '../../styles/navigation/categoriesFilterBar.scss';
 
 function categoriesFilterBar(props) {
   const { categories, filterMovieList, sortKey } = props;
-
   const doFiltering = (filterKey) => {
-    filterMovieList(filterKey, sortKey);
+    filterMovieList(filterKey, sortKey, FILTER_MOVIE_BY);
   };
   const buildFilterItem = (category, ind) => {
     const status = ind === 0 ? 'active' : '';
@@ -52,6 +52,6 @@ const mapStateToProps = (state) => ({
   movies: state.movies,
   sortKey: state.sortedBy,
 });
-const mapDispatchToProps = { filterMovieList: buildMovieList };
+const mapDispatchToProps = { filterMovieList: loadMovieList };
 
 export default connect(mapStateToProps, mapDispatchToProps)(categoriesFilterBar);

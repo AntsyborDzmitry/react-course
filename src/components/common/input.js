@@ -4,18 +4,16 @@ import '../../styles/common/input.scss';
 
 export default function input(props) {
   const {
-    inputType,
-    inputName,
-    labelTitle,
-    inputPlaceholder,
-    clickListener,
-    changeListener,
+    inputType, inputName, labelTitle, value, inputPlaceholder, clickListener,
   } = props;
 
   const inputRef = useRef(null);
-  const defaultDateTypeChangeListener = () => {
-    const inputElem = inputRef.current;
-    inputElem.className = (inputElem.value !== '' ? 'has-value' : '');
+
+  const changeListener = (e) => {
+    const inputElem = e.target;
+    if (inputType === 'date') {
+      inputElem.className = (inputElem.value !== '' ? 'has-value' : '');
+    }
   };
   const resetDatePlaceholder = () => inputRef.current.classList.remove('has-value');
 
@@ -29,6 +27,13 @@ export default function input(props) {
     };
   }, []);
 
+  if (inputRef.current && value !== inputRef.current.value) {
+    if (inputType === 'date') {
+      inputRef.current.className = (value !== '' ? 'has-value' : '');
+    }
+    inputRef.current.value = value;
+  }
+
   return (
     <>
       <label>
@@ -37,7 +42,7 @@ export default function input(props) {
           type={inputType}
           name={inputName}
           placeholder={inputPlaceholder}
-          onChange={inputType === 'date' ? defaultDateTypeChangeListener : changeListener}
+          onChange={changeListener}
           onClick={clickListener}
           ref={inputRef}
         />
@@ -50,7 +55,10 @@ input.propTypes = {
   inputType: PropTypes.string.isRequired,
   inputName: PropTypes.string,
   labelTitle: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   inputPlaceholder: PropTypes.string,
-  changeListener: PropTypes.func,
   clickListener: PropTypes.func,
 };

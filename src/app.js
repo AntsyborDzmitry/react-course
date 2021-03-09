@@ -35,7 +35,8 @@ function App() {
           <Navigation />
           <SearchResultNumber />
           <MovieList
-            selectedMovieHandler={setSelectedMovie}
+            setSelectedMovie={setSelectedMovie}
+            selectedMovie={selectedMovie}
             movieDetailsVisibilityHandler={setMovieDetailsVisibility}
           />
         </Content>

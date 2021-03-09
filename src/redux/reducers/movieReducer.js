@@ -1,25 +1,46 @@
-import {
-  GET_MOVIE_LIST, SORT_MOVIE_BY, FILTER_MOVIE_BY, GET_MOVIE_LIST_PENDING,
-} from '../actions/actionTypes';
+import * as actionType from '../actions/actionTypes';
 
-const initialState = { movies: [], filter: '', sortBy: 'release_date' };
+const initialState = {
+  movies: [], filterBy: '', sortBy: 'release_date', needReloadMovies: true, pending: false,
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case GET_MOVIE_LIST: return {
-      movies: action.payload,
+    case actionType.GET_MOVIE_LIST: return {
+      ...state,
+      movies: action.payload.data,
+      needReloadMovies: false,
     };
-    case GET_MOVIE_LIST_PENDING: return {
-      movies: state.movies,
+    case actionType.ADD_MOVIE: return {
+      ...state,
+      needReloadMovies: action.payload,
+    };
+    case actionType.DELETE_MOVIE: return {
+      ...state,
+      movies: action.payload,
+      needReloadMovies: false,
+    };
+    case actionType.EDIT_MOVIE: return {
+      ...state,
+      movies: action.payload,
+      needReloadMovies: false,
+    };
+    case actionType.GET_MOVIE_LIST_PENDING: return {
+      ...state,
+      needReloadMovies: action.payload,
       pending: action.payload,
     };
-    case SORT_MOVIE_BY: return {
-      movies: state.movies,
-      sortBy: action.payload,
+    case actionType.SORT_MOVIE_BY: return {
+      ...state,
+      movies: action.payload.data,
+      sortBy: action.payload.sortKey,
+      needReloadMovies: false,
     };
-    case FILTER_MOVIE_BY: return {
-      movies: state.movies,
-      filterBy: action.payload,
+    case actionType.FILTER_MOVIE_BY: return {
+      ...state,
+      movies: action.payload.data,
+      filterBy: action.payload.filterKey,
+      needReloadMovies: false,
     };
 
     default: return state;

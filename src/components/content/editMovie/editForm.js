@@ -31,7 +31,7 @@ function editForm(props) {
     >
       {({ setFieldValue }) => (
         <Form id={`${id}_form`}>
-          <Modal title="edit movie" modalId={`${id}_modal`} resetFormAfterClose={false} displayModal={displayModal}>
+          <Modal title="edit movie" modalId={`${id}_modal`} displayModal={displayModal}>
             <label>
               movie id
               <Field name="id" type="text" placeholder="Movie id here" readOnly />
@@ -84,8 +84,8 @@ function editForm(props) {
             <Field name="revenue" type="hidden" />
 
             <div className="bottom wrapper">
-              <button className="bottom reset" type="reset" value="reset">reset</button>
-              <button className="bottom save" type="submit">save</button>
+              <Button cssClass="bottom reset" type="reset" title="reset" />
+              <Button cssClass="bottom save" type="submit" title="save" />
             </div>
           </Modal>
         </Form>

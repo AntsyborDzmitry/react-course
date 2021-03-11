@@ -6,7 +6,7 @@ import '../../styles/common/buttonClose.scss';
 
 export default function modal(props) {
   const {
-    title, modalId, children, resetFormAfterClose = true, displayModal,
+    title, modalId, children, displayModal,
   } = props;
 
   const hideModal = () => { displayModal(false); };
@@ -30,5 +30,4 @@ modal.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  resetFormAfterClose: PropTypes.bool,
 };

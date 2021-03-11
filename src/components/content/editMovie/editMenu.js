@@ -4,8 +4,6 @@ import '../../../styles/content/editMovie/editMenu.scss';
 
 export default function editMenu(props) {
   const {
-    modalDeleteId,
-    modalEditId,
     editMenuCssClass,
     showEditMenu,
     setVisibleEditForm,
@@ -43,8 +41,8 @@ export default function editMenu(props) {
 }
 
 editMenu.propTypes = {
-  modalDeleteId: PropTypes.string.isRequired,
-  modalEditId: PropTypes.string.isRequired,
-  displayCssClass: PropTypes.string,
-  stateHandler: PropTypes.func,
+  editMenuCssClass: PropTypes.string.isRequired,
+  showEditMenu: PropTypes.func,
+  setVisibleEditForm: PropTypes.func,
+  setVisibleDeleteForm: PropTypes.func,
 };

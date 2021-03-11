@@ -28,8 +28,6 @@ function movieList(props) {
       movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
     >
       <EditMovie
-        modalDeleteId={`${deleteId}_modal`}
-        modalEditId={`${editId}_modal`}
         setVisibleEditForm={setVisibleEditForm}
         setVisibleDeleteForm={setVisibleDeleteForm}
       />

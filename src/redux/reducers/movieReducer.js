@@ -13,7 +13,7 @@ export default (state = initialState, action) => {
     };
     case actionType.ADD_MOVIE: return {
       ...state,
-      needReloadMovies: action.payload,
+      movies: action.payload,
     };
     case actionType.DELETE_MOVIE: return {
       ...state,

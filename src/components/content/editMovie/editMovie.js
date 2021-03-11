@@ -4,7 +4,9 @@ import CircleMenu from './circleMenu';
 import EditMenu from './editMenu';
 
 export default function editMovie(props) {
-  const { modalDeleteId, modalEditId } = props;
+  const {
+    modalDeleteId, modalEditId, setVisibleEditForm, setVisibleDeleteForm,
+  } = props;
   const [editMenuCssClass, setEditMenuCssClass] = useState('display-none');
 
   const showEditMenu = (state) => {
@@ -15,10 +17,12 @@ export default function editMovie(props) {
     <>
       <CircleMenu stateHandler={showEditMenu} />
       <EditMenu
-        displayCssClass={editMenuCssClass}
+        editMenuCssClass={editMenuCssClass}
         modalDeleteId={modalDeleteId}
         modalEditId={modalEditId}
-        stateHandler={showEditMenu}
+        showEditMenu={showEditMenu}
+        setVisibleEditForm={setVisibleEditForm}
+        setVisibleDeleteForm={setVisibleDeleteForm}
       />
     </>
   );

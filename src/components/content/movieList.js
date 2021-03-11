@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
@@ -9,16 +9,16 @@ import { loadMovieList } from '../../redux/actions/actionCreators';
 
 function movieList(props) {
   const {
-    movies, setSelectedMovie, selectedMovie, movieDetailsVisibilityHandler, setMovieList,
-    needReloadMovies, pending,
+    movies, setSelectedMovie, selectedMovie, movieDetailsVisibilityHandler, setMovieList, pending,
   } = props;
-
+  const [visibleEditForm, setVisibleEditForm] = useState(false);
+  const [visibleDeleteForm, setVisibleDeleteForm] = useState(false);
   const editId = 'edit_movie';
   const deleteId = 'delete_movie';
 
-  if (needReloadMovies) {
+  useEffect(() => {
     setMovieList();
-  }
+  }, []);
 
   const itemsBuilder = (item) => (
     <MovieItem
@@ -27,7 +27,12 @@ function movieList(props) {
       setSelectedMovie={setSelectedMovie}
       movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
     >
-      <EditMovie modalDeleteId={`${deleteId}_modal`} modalEditId={`${editId}_modal`} />
+      <EditMovie
+        modalDeleteId={`${deleteId}_modal`}
+        modalEditId={`${editId}_modal`}
+        setVisibleEditForm={setVisibleEditForm}
+        setVisibleDeleteForm={setVisibleDeleteForm}
+      />
     </MovieItem>
   );
 
@@ -39,8 +44,26 @@ function movieList(props) {
       <div className="row">
         {items}
       </div>
-      <EditForm id={editId} selectedMovie={selectedMovie} />
-      <DeleteForm id={deleteId} selectedMovie={selectedMovie} />
+      {
+        visibleEditForm
+        && (
+          <EditForm
+            id={editId}
+            selectedMovie={selectedMovie}
+            displayModal={setVisibleEditForm}
+          />
+        )
+      }
+      {
+        visibleDeleteForm
+        && (
+          <DeleteForm
+            id={deleteId}
+            selectedMovie={selectedMovie}
+            displayModal={setVisibleDeleteForm}
+          />
+        )
+      }
     </div>
   );
 }
@@ -74,7 +97,7 @@ movieList.propTypes = {
 };
 
 const mapStateToProps = (state) => (
-  { movies: state.movies, needReloadMovies: state.needReloadMovies, pending: state.pending }
+  { movies: state.movies, pending: state.pending }
 );
 
 const mapDispatchToProps = { setMovieList: loadMovieList };

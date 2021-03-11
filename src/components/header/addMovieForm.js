@@ -1,40 +1,88 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
 import PropTypes from 'prop-types';
+import * as Yup from 'yup';
+import { addFormInitialValues, getAddFormValidationSchema, onChangeDate } from '../../data/formData';
 import Button from '../common/button';
-import Input from '../common/input';
-import InputSelect from '../common/inputSelect';
 import Modal from '../common/modal';
 import { addMovie } from '../../redux/actions/actionCreators';
 import { GENRE_OPTIONS } from '../../data/constant';
 import { getSerializedFormData } from '../../utils/utils';
 
 function addMovieForm(props) {
-  const { id, addMovieHandler } = props;
+  const { id, addMovieHandler, displayModal } = props;
 
-  const doSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(document.getElementById(`${id}_form`));
-    const serializedData = getSerializedFormData(formData);
+  const onSubmit = (values) => {
+    const serializedData = getSerializedFormData(values);
     addMovieHandler(serializedData);
-    document.querySelector(`#${id}_modal`).classList.add('display-none');
+    displayModal(false);
   };
 
   return (
-    <form id={`${id}_form`} onSubmit={doSubmit}>
-      <Modal title="add movie" modalId={`${id}_modal`}>
-        <Input inputType="text" labelTitle="title" inputId="add_movie_title" inputName="title" inputPlaceholder="Title here" />
-        <Input inputType="date" labelTitle="release date" inputId="add_movie_date" inputName="release_date" inputPlaceholder="Select Date" />
-        <Input inputType="text" labelTitle="movie url" inputId="add_movie_url" inputName="poster_path" inputPlaceholder="Movie URL here" />
-        <InputSelect labelTitle="genre" inputId="add_movie_genre" inputName="genres" inputPlaceholder="Select Genre" options={GENRE_OPTIONS} />
-        <Input inputType="text" labelTitle="overview" inputId="add_movie_overview" inputName="overview" inputPlaceholder="Overview here" />
-        <Input inputType="text" labelTitle="runtime" inputId="add_movie_runtime" inputName="runtime" inputPlaceholder="Runtime here" />
-        <div className="bottom wrapper">
-          <Button cssClass="bottom reset" type="reset" title="reset" />
-          <Button cssClass="bottom submit" type="submit" title="submit" />
-        </div>
-      </Modal>
-    </form>
+    <Formik
+      initialValues={addFormInitialValues}
+      validationSchema={getAddFormValidationSchema(Yup)}
+      onSubmit={onSubmit}
+    >
+      {({ setFieldValue }) => (
+        <Form id={`${id}_form`}>
+          <Modal title="add movie" modalId={`${id}_modal`} displayModal={displayModal}>
+            <label>
+              title
+              <Field name="title" type="text" placeholder="Title here" />
+              <ErrorMessage name="title" component="div" className="invalid-feedback" />
+            </label>
+            <label>
+              release date
+              <Field name="release_date" type="date" placeholder="Select Date" onChange={onChangeDate(setFieldValue)} />
+              <ErrorMessage name="release_date" component="div" className="invalid-feedback" />
+            </label>
+            <label>
+              movie url
+              <Field name="poster_path" type="text" placeholder="Movie URL here" />
+              <ErrorMessage name="poster_path" component="div" className="invalid-feedback" />
+            </label>
+            <label>
+              genre
+              <Field name="genres">
+                {({ field }) => (
+                  <select {...field}>
+                    <option hidden>Select Genre</option>
+                    {
+                      GENRE_OPTIONS.map(
+                        (i) => <option key={i.key} value={i.key}>{i.value}</option>,
+                      )
+                    }
+                  </select>
+                )}
+              </Field>
+            </label>
+            <label>
+              overview
+              <Field name="overview" type="text" placeholder="Overview here" />
+              <ErrorMessage name="overview" component="div" className="invalid-feedback" />
+            </label>
+            <label>
+              runtime
+              <Field name="runtime" type="text" placeholder="Runtime here" />
+              <ErrorMessage name="runtime" component="div" className="invalid-feedback" />
+            </label>
+            <Field name="vote_average" type="hidden" />
+            <Field name="tagline" type="hidden" />
+            <Field name="vote_count" type="hidden" />
+            <Field name="budget" type="hidden" />
+            <Field name="revenue" type="hidden" />
+            <div className="bottom wrapper">
+              <Button cssClass="bottom reset" type="reset" title="reset" />
+              <Button cssClass="bottom submit" type="submit" title="submit" />
+            </div>
+          </Modal>
+        </Form>
+      )}
+    </Formik>
   );
 }
 

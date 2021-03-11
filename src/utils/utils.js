@@ -39,7 +39,7 @@ function parseNumberValueOrDefault(value, defaultValue) {
 }
 
 export function getSerializedFormData(formData) {
-  const serializedData = Object.fromEntries(formData.entries());
+  const serializedData = formData;
   serializedData.genres = [serializedData.genres];
   if (!serializedData.tagline) {
     serializedData.tagline = '-';

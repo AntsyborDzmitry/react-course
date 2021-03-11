@@ -6,12 +6,17 @@ import {
 } from '../../services/apiCall';
 
 function addMovie(data) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     const response = doPostApiCall(`${HOST}${URL}`, data);
     response.then((res) => {
       if (res && res.ok) {
-        dispatch({ type: actionType.ADD_MOVIE, payload: true });
+        return res.json();
       }
+      return {};
+    }).then((result) => {
+      const moviesCopy = [...getState().movies];
+      moviesCopy.unshift(result);
+      dispatch({ type: actionType.ADD_MOVIE, payload: moviesCopy });
     });
   };
 }

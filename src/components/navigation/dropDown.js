@@ -4,24 +4,37 @@ import '../../styles/navigation/dropDown.scss';
 
 export default function dropDown(props) {
   const { options } = props;
-  const [ dropDownMenuState, setDropDownMenuState ] = useState('');
+  const [openDropDownState, setOpenDropDownState] = useState('');
+  const [selectedValue, setSelectedValue] = useState('');
+
+  const generateOptionsState = (items, target) => items.map(
+    (item) => {
+      let selected = '';
+      if (item === target?.textContent) {
+        selected = 'selected';
+      }
+      return (
+        <span key={item} className={`custom-option ${selected}`} data-value={item} onClick={chooseElementEvent}>
+          {item}
+        </span>
+      );
+    },
+  );
 
   const chooseElementEvent = (e) => {
     const { target } = e;
-    if (!target.classList.contains('selected')) {
-      const selected = target.parentNode.querySelector('.custom-option.selected');
-      if (selected) {
-        selected.classList.remove('selected');
-      }
-      target.classList.add('selected');
-      target.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = target.textContent;
-    }
+    const newOptionsState = generateOptionsState(options, target);
+    setOpenDropDownState('');
+    setDropDownOptionsState(newOptionsState);
+    setSelectedValue(target.textContent);
   };
 
-  const openMenuEvent = (e) => { setDropDownMenuState('open'); };
+  const [dropDownOptionsState, setDropDownOptionsState] = useState(generateOptionsState(options));
+  const openMenuEvent = () => { setOpenDropDownState('open'); };
   const handleClick = (e) => {
-    if (!e.target.classList.contains('custom-select__trigger')) {
-      setDropDownMenuState('');
+    if (!e.target.classList.contains('custom-select__trigger')
+      && !e.target.classList.contains('selected-value')) {
+      setOpenDropDownState('');
     }
   };
 
@@ -34,24 +47,13 @@ export default function dropDown(props) {
 
   return (
     <div className="custom-select-wrapper">
-      <div className={`custom-select ${dropDownMenuState}`} onClick={openMenuEvent}>
+      <div className={`custom-select ${openDropDownState}`} onClick={openMenuEvent}>
         <div className="custom-select__trigger">
-          <span />
+          <span className="selected-value">{selectedValue}</span>
           <div className="arrow" />
         </div>
         <div className="custom-options">
-          {
-            options.map((item) => (
-              <span
-                key={item}
-                className="custom-option"
-                data-value={item}
-                onClick={chooseElementEvent}
-              >
-                {item}
-              </span>
-            ))
-          }
+          {dropDownOptionsState}
         </div>
       </div>
     </div>

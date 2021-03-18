@@ -1,15 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Search from './search';
 import HeaderMenu from './headerMenu';
 
-export default function headerContent(props) {
-  const {
-    movieDetailsVisibility,
-  } = props;
+function headerContent(props) {
+  const { visibility } = props;
 
   return (
-    <div className={`header-content ${movieDetailsVisibility}`}>
+    <div className={`header-content ${visibility}`}>
       <HeaderMenu />
       <Search />
       <div className="concord-img-gradient" />
@@ -18,5 +17,9 @@ export default function headerContent(props) {
 }
 
 headerContent.propTypes = {
-  movieDetailsVisibility: PropTypes.string.isRequired,
+  visibility: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = (state) => ({ visibility: state.movieDetails.visibility });
+
+export default connect(mapStateToProps, null)(headerContent);

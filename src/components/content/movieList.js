@@ -5,11 +5,12 @@ import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
 import EditForm from './editMovie/editForm';
 import DeleteForm from './editMovie/deleteForm';
+import NoMovie from '../common/noMovie';
 import { loadMovieList } from '../../redux/actions/actionCreators';
 
 function movieList(props) {
   const {
-    movies, setSelectedMovie, selectedMovie, movieDetailsVisibilityHandler, setMovieList, pending,
+    movies, setMovieList, pending,
   } = props;
   const [visibleEditForm, setVisibleEditForm] = useState(false);
   const [visibleDeleteForm, setVisibleDeleteForm] = useState(false);
@@ -24,8 +25,6 @@ function movieList(props) {
     <MovieItem
       key={item.id}
       movie={item}
-      setSelectedMovie={setSelectedMovie}
-      movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
     >
       <EditMovie
         setVisibleEditForm={setVisibleEditForm}
@@ -40,14 +39,13 @@ function movieList(props) {
     <div className="movie-list">
       {pending && <div className="loader" />}
       <div className="row">
-        {items}
+        {(items.length && items) || (<NoMovie />)}
       </div>
       {
         visibleEditForm
         && (
           <EditForm
             id={editId}
-            selectedMovie={selectedMovie}
             displayModal={setVisibleEditForm}
           />
         )
@@ -57,7 +55,6 @@ function movieList(props) {
         && (
           <DeleteForm
             id={deleteId}
-            selectedMovie={selectedMovie}
             displayModal={setVisibleDeleteForm}
           />
         )
@@ -94,8 +91,12 @@ movieList.propTypes = {
   setMovieList: PropTypes.func,
 };
 
+movieList.defaultProps = {
+  movies: [],
+};
+
 const mapStateToProps = (state) => (
-  { movies: state.movies, pending: state.pending }
+  { movies: state.movie.movies, pending: state.movie.pending }
 );
 
 const mapDispatchToProps = { setMovieList: loadMovieList };

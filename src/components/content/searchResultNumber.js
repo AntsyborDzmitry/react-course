@@ -28,6 +28,6 @@ searchResultNumber.propTypes = {
   ),
 };
 
-const mapStateToProps = (state) => ({ movies: state.movies });
+const mapStateToProps = (state) => ({ movies: state.movie.movies });
 
 export default connect(mapStateToProps, null)(searchResultNumber);

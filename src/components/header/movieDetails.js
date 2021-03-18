@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Logo from '../common/logo';
 import SearchIconElement from '../common/searchIconElement';
 import { getYearFromReleaseDate } from '../../utils/utils';
+import { SHOW_MOVIE_DETAILS } from '../../redux/actions/actionTypes';
 import '../../styles/header/movieDetails.scss';
 import '../../styles/common/searchIconElement.scss';
 
-export default function movieDetails(props) {
+function movieDetails(props) {
   const {
     selectedMovie,
-    visibilityState,
+    visibility,
     movieDetailsVisibilityHandler,
   } = props;
 
   const hideDetails = () => {
-    movieDetailsVisibilityHandler('');
+    movieDetailsVisibilityHandler();
   };
   return (
     <>
-      <div className={`movie-details ${visibilityState}`}>
+      <div className={`movie-details ${visibility}`}>
         <div className="movie-details-header">
           <Logo logoLink="my-test-site.com" />
           <SearchIconElement clickListener={hideDetails} />
@@ -57,6 +59,14 @@ movieDetails.propTypes = {
     overview: PropTypes.string,
     vote_average: PropTypes.number,
   }),
-  visibilityState: PropTypes.string,
+  visibility: PropTypes.string,
   movieDetailsVisibilityHandler: PropTypes.func,
 };
+
+const mapStateToProps = (state) => ({
+  visibility: state.movieDetails.visibility,
+  selectedMovie: state.movieDetails.selectedMovie,
+});
+
+const mapDispatchToProps = { movieDetailsVisibilityHandler: () => ({ type: SHOW_MOVIE_DETAILS, payload: '' }) };
+export default connect(mapStateToProps, mapDispatchToProps)(movieDetails);

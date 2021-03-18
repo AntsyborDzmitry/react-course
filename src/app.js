@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles/libs/bootstrap-grid.min.css';
 import './styles/index.scss';
 
@@ -15,30 +15,20 @@ import Logo from './components/common/logo';
 
 function App() {
   const errorMessage = 'Something went wrong.';
-  const [selectedMovie, setSelectedMovie] = useState({});
-  const [movieDetailsVisibility, setMovieDetailsVisibility] = useState('');
 
   return (
     <>
       <ErrorBoundary errorMessage={errorMessage}>
         <Header>
-          <HeaderContent movieDetailsVisibility={movieDetailsVisibility} />
-          <MovieDetails
-            selectedMovie={selectedMovie}
-            visibilityState={movieDetailsVisibility}
-            movieDetailsVisibilityHandler={setMovieDetailsVisibility}
-          />
+          <HeaderContent />
+          <MovieDetails />
         </Header>
       </ErrorBoundary>
       <ErrorBoundary errorMessage={errorMessage}>
         <Content>
           <Navigation />
           <SearchResultNumber />
-          <MovieList
-            setSelectedMovie={setSelectedMovie}
-            selectedMovie={selectedMovie}
-            movieDetailsVisibilityHandler={setMovieDetailsVisibility}
-          />
+          <MovieList />
         </Content>
       </ErrorBoundary>
       <ErrorBoundary errorMessage={errorMessage}>

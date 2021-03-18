@@ -14,7 +14,7 @@ function addMovie(data) {
       }
       return {};
     }).then((result) => {
-      const moviesCopy = [...getState().movies];
+      const moviesCopy = [...getState().movie.movies];
       moviesCopy.unshift(result);
       dispatch({ type: actionType.ADD_MOVIE, payload: moviesCopy });
     });
@@ -26,7 +26,7 @@ function deleteMovie(movieId) {
     const response = doDeleteApiCall(`${HOST}${URL}/${movieId}`);
     response.then((res) => {
       if (res && res.ok) {
-        const updatedMoviesCopy = getState().movies.filter((el) => el.id !== movieId);
+        const updatedMoviesCopy = getState().movie.movies.filter((el) => el.id !== movieId);
         dispatch({ type: actionType.DELETE_MOVIE, payload: updatedMoviesCopy });
       }
     });
@@ -48,7 +48,7 @@ function editMovie(data) {
     const response = doPutApiCall(`${HOST}${URL}`, data);
     response.then((res) => {
       if (res && res.ok) {
-        const moviesCopy = [...getState().movies];
+        const moviesCopy = [...getState().movie.movies];
         const editedMoviesCopy = replaceEditedMovie(moviesCopy, data);
         dispatch({ type: actionType.EDIT_MOVIE, payload: editedMoviesCopy });
       }

@@ -49,8 +49,8 @@ categoriesFilterBar.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.movies,
-  sortKey: state.sortedBy,
+  movies: state.movie.movies,
+  sortKey: state.movie.sortedBy,
 });
 const mapDispatchToProps = { filterMovieList: loadMovieList };
 

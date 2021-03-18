@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getYearFromReleaseDate } from '../../utils/utils';
 import { SHOW_MOVIE_DETAILS, SET_SELECTED_MOVIE } from '../../redux/actions/actionTypes';
@@ -9,12 +10,13 @@ function movieItem(props) {
   const {
     movie, setSelectedMovie, movieDetailsVisibilityHandler, children,
   } = props;
-
+  const history = useHistory();
   const setSelectedMovieAndShow = (e) => {
     setSelectedMovie(movie);
     if (e.target?.classList.contains('movie__img')) {
       movieDetailsVisibilityHandler();
     }
+    history.push(`/film/${movie.id}`);
   };
 
   return (

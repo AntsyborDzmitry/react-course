@@ -25,6 +25,6 @@ export const CATEGORIES = [
 
 export const HOST = 'http://localhost:4000';
 export const URL = '/movies';
-
+export const BOUNDARY_ERROR_MESSAGE = 'Something went wrong.';
 export const SEND_ERROR_MESSAGE = 'Problem with sending data to server: ';
 export const GET_ERROR_MESSAGE = 'Problem with getting data from server: ';

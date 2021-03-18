@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Logo from '../common/logo';
 import SearchIconElement from '../common/searchIconElement';
 import { getYearFromReleaseDate } from '../../utils/utils';
 import { SHOW_MOVIE_DETAILS } from '../../redux/actions/actionTypes';
-import '../../styles/header/movieDetails.scss';
+import '../../styles/hero/movieDetails.scss';
 import '../../styles/common/searchIconElement.scss';
 
 function movieDetails(props) {
@@ -18,11 +17,11 @@ function movieDetails(props) {
   const hideDetails = () => {
     movieDetailsVisibilityHandler();
   };
+
   return (
     <>
       <div className={`movie-details ${visibility}`}>
-        <div className="movie-details-header">
-          <Logo logoLink="my-test-site.com" />
+        <div className="movie-details-hero">
           <SearchIconElement clickListener={hideDetails} />
         </div>
         <div className="movie-details-content">

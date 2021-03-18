@@ -1,41 +1,41 @@
 import React from 'react';
+import {
+  BrowserRouter as Router, Route, Switch, Redirect,
+} from 'react-router-dom';
 import './styles/libs/bootstrap-grid.min.css';
 import './styles/index.scss';
-
-import ErrorBoundary from './errorHandlers/errorBoundary';
 import Header from './components/layout/header';
-import HeaderContent from './components/header/headerContent';
-import MovieDetails from './components/header/movieDetails';
-import Content from './components/layout/content';
-import SearchResultNumber from './components/content/searchResultNumber';
-import Navigation from './components/navigation/navigation';
-import MovieList from './components/content/movieList';
+import ContentComponent from './components/content/contentComponent';
 import Footer from './components/layout/footer';
 import Logo from './components/common/logo';
+import NoMatch from './components/pages/error';
 
 function App() {
-  const errorMessage = 'Something went wrong.';
-
   return (
     <>
-      <ErrorBoundary errorMessage={errorMessage}>
+      <Router>
         <Header>
-          <HeaderContent />
-          <MovieDetails />
+          <Logo logoLink="my-test-site.com" />
         </Header>
-      </ErrorBoundary>
-      <ErrorBoundary errorMessage={errorMessage}>
-        <Content>
-          <Navigation />
-          <SearchResultNumber />
-          <MovieList />
-        </Content>
-      </ErrorBoundary>
-      <ErrorBoundary errorMessage={errorMessage}>
+        <Switch>
+          <Route exact path="/">
+            <ContentComponent />
+          </Route>
+          <Route exact path="/search query">
+            <ContentComponent />
+          </Route>
+          <Route exact path="/film/:id">
+            <ContentComponent />
+          </Route>
+          <Route exact path="/404">
+            <NoMatch />
+          </Route>
+          <Redirect from="*" to="/404" />
+        </Switch>
         <Footer>
           <Logo logoLink="my-test-site.com" />
         </Footer>
-      </ErrorBoundary>
+      </Router>
     </>
   );
 }

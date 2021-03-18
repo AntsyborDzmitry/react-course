@@ -4,7 +4,7 @@ const initialState = {
   visibility: '', selectedMovie: {},
 };
 
-export default (action, state = initialState) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case actionType.SHOW_MOVIE_DETAILS: return {
       ...state,

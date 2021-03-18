@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../common/button';
-import '../../styles/header/search.scss';
+import '../../styles/hero/search.scss';
 
 export default function search() {
   return (

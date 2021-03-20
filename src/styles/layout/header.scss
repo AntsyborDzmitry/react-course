@@ -1,6 +1,5 @@
 .header {
   width: 100%;
-  height: 300px;
   background-size: 100%;
   background-image: url(/images/header-bg.jpg);
 }
@@ -12,4 +11,14 @@
   top: 0;
   width: 100%;
   background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.header-content {
+  height: 300px;
+}
+
+.header-content.movie-details-active {
+  position: absolute;
+  width: 100%;
+  z-index: 0;
 }

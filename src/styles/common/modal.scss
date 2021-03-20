@@ -21,15 +21,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  .close.top {
-    font-size: 30px;
-    width: 30px;
-    background-color: $netflix-background-color;
-    align-self: flex-end;
-    border: none;
-    color: white;
-  }
-
   .modal-content {
     flex-direction: column;
     display: flex;

@@ -1,0 +1,12 @@
+button {
+  cursor: pointer;
+
+  &.close {
+    width: 30px;
+    background-color: inherit;
+    align-self: flex-end;
+    color: white;
+    border: none;
+    font-size: 30px;
+  }
+}

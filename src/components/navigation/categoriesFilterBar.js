@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import FilterItem from './filterItem';
 import '../../styles/navigation/categoriesFilterBar.scss';
@@ -11,6 +11,9 @@ export default function categoriesFilterBar(props) {
     return (<FilterItem key={category} category={category} activityStatus={status} />);
   };
 
+  const categoryBuilder = (category, ind) => buildFilterItem(category, ind);
+  const items = useMemo(() => categories.map(categoryBuilder), [categories]);
+
   const highLightActiveFilter = (e) => {
     const elements = Array.from(e.currentTarget.children);
     if (elements.length) {
@@ -20,10 +23,8 @@ export default function categoriesFilterBar(props) {
   };
 
   return (
-    <div className="categories-bar" onClick={highLightActiveFilter}>
-      {
-        categories.map((category, ind) => buildFilterItem(category, ind))
-      }
+    <div className="categories-bar" onClick={useCallback(highLightActiveFilter, [])}>
+      {items}
     </div>
   );
 }

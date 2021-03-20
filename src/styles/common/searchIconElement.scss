@@ -1,0 +1,24 @@
+@import '../vars';
+
+.search-icon-wrapper {
+  cursor: pointer;
+
+  .search-icon {
+    position: relative;
+    width: 14px;
+
+    &_circle {
+      height: 14px;
+      border: 2px solid $netflix-pink;
+      border-radius: 7px;
+    }
+
+    &_rectangle {
+      position: absolute;
+      right: 10px;
+      width: 9px;
+      transform: rotate(135deg);
+      border: 1px solid $netflix-pink;
+    }
+  }
+}

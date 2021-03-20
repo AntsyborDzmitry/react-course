@@ -1,6 +1,8 @@
 import React from 'react';
-import '../../styles/common/modal.scss';
 import PropTypes from 'prop-types';
+import ButtonClose from './buttonClose';
+import '../../styles/common/modal.scss';
+import '../../styles/common/buttonClose.scss';
 
 export default function modal(props) {
   const {
@@ -17,9 +19,7 @@ export default function modal(props) {
   return (
     <div id={modalId} className="modal display-none">
       <section className="modal-main">
-        <button type="button" className="top close" aria-label="Close" onClick={hideModal}>
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <ButtonClose clickListener={hideModal} />
         <div className="modal-content">
           <div className="modal-title">{title}</div>
           { children }

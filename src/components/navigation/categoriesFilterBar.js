@@ -27,9 +27,6 @@ function categoriesFilterBar(props) {
   const categoryBuilder = (category, ind) => buildFilterItem(category, ind);
   const items = useMemo(() => categories.map(categoryBuilder), [categories]);
 
-  const categoryBuilder = (category, ind) => buildFilterItem(category, ind);
-  const items = useMemo(() => categories.map(categoryBuilder), [categories]);
-
   const highLightActiveFilter = (e) => {
     const elements = Array.from(e.currentTarget.children);
     if (elements.length) {

@@ -57,8 +57,8 @@ function editMovie(data) {
 }
 
 function loadMovieList(filterKey, sortKey, action = actionType.GET_MOVIE_LIST) {
-  const url = buildGetMovieListURL(filterKey, sortKey);
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const url = buildGetMovieListURL(filterKey, sortKey, getState);
     dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
     const response = doGetApiCall(url);
     response.then(
@@ -68,6 +68,27 @@ function loadMovieList(filterKey, sortKey, action = actionType.GET_MOVIE_LIST) {
             {
               type: action,
               payload: { data: data.data, filterKey, sortKey },
+            },
+          );
+        }
+        dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
+      },
+    );
+  };
+}
+
+function searchMovies(searchKey, action = actionType.SEARCH_MOVIES) {
+  const url = `${HOST}${URL}?search=${searchKey}&searchBy=title`;
+  return (dispatch) => {
+    dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
+    const response = doGetApiCall(url);
+    response.then(
+      (data) => {
+        if (data?.data) {
+          dispatch(
+            {
+              type: action,
+              payload: { data: data.data },
             },
           );
         }
@@ -89,5 +110,5 @@ function sortMovieListBy(movieList, key) {
 }
 
 export {
-  loadMovieList, addMovie, deleteMovie, editMovie, sortMovieListBy,
+  loadMovieList, searchMovies, addMovie, deleteMovie, editMovie, sortMovieListBy,
 };

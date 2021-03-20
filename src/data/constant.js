@@ -16,7 +16,7 @@ export const GENRE_OPTIONS = [
 ];
 
 export const CATEGORIES = [
-  { key: '', value: 'all' },
+  { key: 'all', value: 'all' },
   { key: 'documentary', value: 'documentary' },
   { key: 'comedy', value: 'comedy' },
   { key: 'horror', value: 'horror' },

@@ -12,6 +12,7 @@ export default function filterItem(props) {
   const clickHandler = (e) => {
     doFiltering(e.target?.dataset?.key);
   };
+
   return (
     <>
       <div data-key={dataKey} className={activityStatus} onClick={clickHandler}>{category}</div>

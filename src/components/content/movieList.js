@@ -1,26 +1,30 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
 import EditForm from './editMovie/editForm';
 import DeleteForm from './editMovie/deleteForm';
 import NoMovie from '../common/noMovie';
-import { loadMovieList } from '../../redux/actions/actionCreators';
+import { searchMovies } from '../../redux/actions/actionCreators';
 
 function movieList(props) {
   const {
-    movies, setMovieList, pending,
+    movies, pending, findMovies,
   } = props;
   const [visibleEditForm, setVisibleEditForm] = useState(false);
   const [visibleDeleteForm, setVisibleDeleteForm] = useState(false);
+  const [prevSearch, setPrevSearch] = useState('');
   const editId = 'edit_movie';
   const deleteId = 'delete_movie';
+  const location = useLocation();
+  const searchParam = new URLSearchParams(location.search).get('search');
 
-  useEffect(() => {
-    setMovieList();
-  }, []);
-
+  if (searchParam && prevSearch !== searchParam) {
+    setPrevSearch(searchParam);
+    findMovies(searchParam);
+  }
   const itemsBuilder = (item) => (
     <MovieItem
       key={item.id}
@@ -88,7 +92,6 @@ movieList.propTypes = {
     vote_average: PropTypes.number,
   }),
   movieDetailsVisibilityHandler: PropTypes.func,
-  setMovieList: PropTypes.func,
 };
 
 movieList.defaultProps = {
@@ -99,5 +102,5 @@ const mapStateToProps = (state) => (
   { movies: state.movie.movies, pending: state.movie.pending }
 );
 
-const mapDispatchToProps = { setMovieList: loadMovieList };
+const mapDispatchToProps = { findMovies: searchMovies };
 export default connect(mapStateToProps, mapDispatchToProps)(movieList);

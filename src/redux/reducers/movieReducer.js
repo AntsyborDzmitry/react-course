@@ -1,7 +1,7 @@
 import * as actionType from '../actions/actionTypes';
 
 const initialState = {
-  movies: [], filterBy: '', sortBy: 'release_date', pending: false,
+  movies: [], filterBy: '', sortBy: '', pending: false,
 };
 
 export default (state = initialState, action) => {
@@ -9,6 +9,12 @@ export default (state = initialState, action) => {
     case actionType.GET_MOVIE_LIST: return {
       ...state,
       movies: action.payload.data,
+    };
+    case actionType.SEARCH_MOVIES: return {
+      ...state,
+      movies: action.payload.data,
+      sortBy: 'release_date',
+      filterBy: '',
     };
     case actionType.ADD_MOVIE: return {
       ...state,

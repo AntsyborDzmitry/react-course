@@ -1,12 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import DropDown from './dropDown';
+import { loadMovieList } from '../../redux/actions/actionCreators';
+import { SORT_OPTIONS } from '../../data/constant';
+import { SORT_MOVIE_BY } from '../../redux/actions/actionTypes';
 import '../../styles/navigation/sortBar.scss';
 
-export default function sortBar() {
+function sortBar(props) {
+  const { sortMovieList, filterKey } = props;
+  const doSorting = (sortKey) => {
+    sortMovieList(filterKey, sortKey, SORT_MOVIE_BY);
+  };
+
   return (
     <div className="sort-bar">
       <div className="sort-title">sort by</div>
-      <DropDown options={['year', 'genre', 'title']} />
+      <DropDown options={SORT_OPTIONS} sortMovieHandler={doSorting} />
     </div>
   );
 }
+
+sortBar.propTypes = {
+  sortMovieList: PropTypes.func,
+  filterKey: PropTypes.string,
+};
+
+const mapStateToProps = (state) => ({
+  movies: state.movies,
+  filterKey: state.filterBy,
+});
+const mapDispatchToProps = { sortMovieList: loadMovieList };
+
+export default connect(mapStateToProps, mapDispatchToProps)(sortBar);

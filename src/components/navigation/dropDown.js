@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../../styles/navigation/dropDown.scss';
 
 export default function dropDown(props) {
-  const { options } = props;
+  const { options, sortMovieHandler } = props;
   const [openDropDownState, setOpenDropDownState] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
 
@@ -11,6 +11,7 @@ export default function dropDown(props) {
     const { target } = e;
     setOpenDropDownState('');
     setSelectedValue(target.textContent);
+    sortMovieHandler(target.dataset.value);
   };
   const openMenuEvent = () => { setOpenDropDownState('open'); };
   const handleClick = (e) => {
@@ -21,6 +22,7 @@ export default function dropDown(props) {
   };
 
   useEffect(() => {
+    setSelectedValue(options[0].value);
     document.addEventListener('click', handleClick);
     return () => {
       document.removeEventListener('click', handleClick);
@@ -29,12 +31,12 @@ export default function dropDown(props) {
 
   const optionsBuilder = (item) => (
     <span
-      key={item}
+      key={item.key}
       className="custom-option"
-      data-value={item}
+      data-value={item.key}
       onClick={chooseElementEvent}
     >
-      {item}
+      {item.value}
     </span>
   );
 
@@ -55,5 +57,11 @@ export default function dropDown(props) {
 }
 
 dropDown.propTypes = {
-  options: PropTypes.instanceOf(Array).isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      value: PropTypes.string,
+    }),
+  ),
+  sortMovieHandler: PropTypes.func,
 };

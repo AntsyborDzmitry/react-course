@@ -12,7 +12,6 @@ import Navigation from './components/navigation/navigation';
 import MovieList from './components/content/movieList';
 import Footer from './components/layout/footer';
 import Logo from './components/common/logo';
-import { movies, searchResultNumber } from './data/mockData';
 
 function App() {
   const errorMessage = 'Something went wrong.';
@@ -34,10 +33,10 @@ function App() {
       <ErrorBoundary errorMessage={errorMessage}>
         <Content>
           <Navigation />
-          <SearchResultNumber resultNumber={searchResultNumber} />
+          <SearchResultNumber />
           <MovieList
-            movies={movies}
-            selectedMovieHandler={setSelectedMovie}
+            setSelectedMovie={setSelectedMovie}
+            selectedMovie={selectedMovie}
             movieDetailsVisibilityHandler={setMovieDetailsVisibility}
           />
         </Content>

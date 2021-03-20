@@ -1,7 +1,7 @@
-const SHOW_MODAL = 'SHOW-MODAL';
-const HIDE_MODAL = 'HIDE-MODAL';
-
-export {
-  SHOW_MODAL,
-  HIDE_MODAL,
-};
+export const GET_MOVIE_LIST = 'GET_MOVIE_LIST';
+export const ADD_MOVIE = 'ADD_MOVIE';
+export const DELETE_MOVIE = 'DELETE_MOVIE';
+export const EDIT_MOVIE = 'EDIT_MOVIE';
+export const SORT_MOVIE_BY = 'SORT_MOVIE_BY';
+export const FILTER_MOVIE_BY = 'FILTER_MOVIE_BY';
+export const GET_MOVIE_LIST_PENDING = 'GET_MOVIE_LIST_PENDING';

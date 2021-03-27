@@ -1,5 +1,5 @@
 import * as actionType from './actionTypes';
-import { buildGetMovieListURL, compareValues } from '../../utils/utils';
+import { buildGetMovieListURL } from '../../utils/utils';
 import { HOST, URL } from '../../data/constant';
 import {
   doGetApiCall, doPostApiCall, doDeleteApiCall, doPutApiCall,
@@ -98,17 +98,6 @@ function searchMovies(searchKey, action = actionType.SEARCH_MOVIES) {
   };
 }
 
-function sortMovieListBy(movieList, key) {
-  return (dispatch) => {
-    let list = movieList || [];
-    if (list?.length) {
-      list = [...movieList];
-      list.sort(compareValues(key));
-    }
-    return dispatch({ type: actionType.SORT_MOVIE_BY, payload: key });
-  };
-}
-
 export {
-  loadMovieList, searchMovies, addMovie, deleteMovie, editMovie, sortMovieListBy,
+  loadMovieList, searchMovies, addMovie, deleteMovie, editMovie,
 };

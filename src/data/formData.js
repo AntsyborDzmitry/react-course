@@ -53,11 +53,11 @@ export const getAddFormValidationSchema = (Yup) => Yup.object({
 });
 
 export const onChangeDate = (setFieldValue) => (e) => {
-  const dateValue = e.currentTarget.value;
+  const dateValue = e.target.value;
   setFieldValue('release_date', dateValue);
   if (dateValue) {
-    e.target.classList.add('has-value');
+    e.target.classList?.add('has-value');
     return;
   }
-  e.target.classList.remove('has-value');
+  e.target.classList?.remove('has-value');
 };

@@ -1,6 +1,9 @@
 node_modules/*
 dist/*
 src/styles/*
+src/test-coverage/*
+test-coverage/*
+coverage/*
 target/*
 .git/*
 .idea/*

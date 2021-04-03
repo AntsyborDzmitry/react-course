@@ -4,16 +4,16 @@ import '../../../styles/content/editMovie/editMenu.scss';
 
 export default function editMenu(props) {
   const {
-    modalDeleteId,
-    modalEditId,
-    displayCssClass,
-    stateHandler,
+    editMenuCssClass,
+    showEditMenu,
+    setVisibleEditForm,
+    setVisibleDeleteForm,
   } = props;
 
   const handleExternalClick = (e) => {
     const { classList } = e.target;
     if (!classList.contains('edit-menu') && !classList.contains('circle')) {
-      stateHandler('display-none');
+      showEditMenu('display-none');
     }
   };
 
@@ -24,22 +24,25 @@ export default function editMenu(props) {
     };
   }, []);
 
-  const openModal = (modalId) => () => {
-    document.querySelector(`#${modalId}`).classList.remove('display-none');
+  const openEditModal = () => {
+    setVisibleEditForm(true);
+  };
+  const openDeleteModal = () => {
+    setVisibleDeleteForm(true);
   };
 
   return (
-    <div className={`edit-menu ${displayCssClass}`}>
+    <div className={`edit-menu ${editMenuCssClass}`}>
       <div><span>x</span></div>
-      <div onClick={openModal(modalEditId)}>Edit</div>
-      <div onClick={openModal(modalDeleteId)}>Delete</div>
+      <div onClick={openEditModal}>Edit</div>
+      <div onClick={openDeleteModal}>Delete</div>
     </div>
   );
 }
 
 editMenu.propTypes = {
-  modalDeleteId: PropTypes.string.isRequired,
-  modalEditId: PropTypes.string.isRequired,
-  displayCssClass: PropTypes.string,
-  stateHandler: PropTypes.func,
+  editMenuCssClass: PropTypes.string.isRequired,
+  showEditMenu: PropTypes.func,
+  setVisibleEditForm: PropTypes.func,
+  setVisibleDeleteForm: PropTypes.func,
 };

@@ -6,18 +6,12 @@ import '../../styles/common/buttonClose.scss';
 
 export default function modal(props) {
   const {
-    title, modalId, children, resetFormAfterClose = true,
+    title, modalId, children, displayModal,
   } = props;
 
-  const hideModal = () => {
-    const modalEl = document.querySelector(`#${modalId}`);
-    modalEl.classList.add('display-none');
-    if (resetFormAfterClose) {
-      modalEl.closest('form').reset();
-    }
-  };
+  const hideModal = () => { displayModal(false); };
   return (
-    <div id={modalId} className="modal display-none">
+    <div id={modalId} className="modal">
       <section className="modal-main">
         <ButtonClose clickListener={hideModal} />
         <div className="modal-content">
@@ -36,5 +30,4 @@ modal.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
-  resetFormAfterClose: PropTypes.bool,
 };

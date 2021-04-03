@@ -1,15 +1,14 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import Button from '../common/button';
 import AddMovieForm from './addMovieForm';
 
 export default function addMovie() {
+  const [visibleAdd, setVisibleAddForm] = useState(false);
   const addMovieId = 'add_movie';
-  const showModal = () => {
-    document.querySelector(`#${addMovieId}_modal`).classList.remove('display-none');
-  };
+  const showModal = () => { setVisibleAddForm(true); };
   return (
     <>
-      <AddMovieForm id={addMovieId} />
+      {visibleAdd && <AddMovieForm id={addMovieId} displayModal={setVisibleAddForm} />}
       <Button cssClass="add-film" title="+ add movie" clickListener={useCallback(showModal, [])} />
     </>
   );

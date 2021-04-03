@@ -5,7 +5,7 @@ export function doGetApiCall(url) {
     .then(
       (response) => response.json(),
     ).catch((error) => {
-      console.error(GET_ERROR_MESSAGE, error);
+      console.error(GET_ERROR_MESSAGE, error);  // eslint-disable-line
     });
 }
 
@@ -21,7 +21,7 @@ export function doPostApiCall(url, data) {
     .then(
       (response) => response,
     ).catch(
-      (error) => { console.error(SEND_ERROR_MESSAGE, error); },
+      (error) => { console.error(SEND_ERROR_MESSAGE, error); }, // eslint-disable-line
     );
 }
 
@@ -33,7 +33,7 @@ export function doDeleteApiCall(url) {
     .then(
       (response) => response,
     ).catch(
-      (error) => { console.error(SEND_ERROR_MESSAGE, error); },
+      (error) => { console.error(SEND_ERROR_MESSAGE, error); }, // eslint-disable-line
     );
 }
 
@@ -49,6 +49,6 @@ export function doPutApiCall(url, data) {
     .then(
       (response) => response,
     ).catch(
-      (error) => { console.error(SEND_ERROR_MESSAGE, error); },
+      (error) => { console.error(SEND_ERROR_MESSAGE, error); }, // eslint-disable-line
     );
 }

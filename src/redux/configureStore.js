@@ -8,6 +8,7 @@ const reducers = combineReducers({
   movieDetails: movieDetailsReducer,
 });
 
-const store = createStore(reducers, applyMiddleware(thunk));
-
-export default store;
+export default (initialState) => {
+  const store = createStore(reducers, initialState, applyMiddleware(thunk));
+  return store;
+};

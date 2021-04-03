@@ -82,7 +82,7 @@ function searchMovies(searchKey, action = actionType.SEARCH_MOVIES) {
   return (dispatch) => {
     dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
     const response = doGetApiCall(url);
-    response.then(
+    return response.then(
       (data) => {
         if (data?.data) {
           dispatch(

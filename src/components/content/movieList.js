@@ -67,6 +67,13 @@ function movieList(props) {
   );
 }
 
+movieList.ssrInit = (searchParam) => {
+  if (searchParam) {
+    return searchMovies(searchParam);
+  }
+  return {};
+};
+
 movieList.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({

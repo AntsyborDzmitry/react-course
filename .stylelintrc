@@ -1,6 +1,7 @@
 {
   "extends": "stylelint-config-standard",
   "ignoreFiles": [
-      "src/styles/libs/*.*"
+      "src/styles/libs/*.*",
+      "dist/*.*"
   ]
 }

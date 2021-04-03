@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.(scss|css)$/,
-        use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -29,13 +29,6 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin(),
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'React training',
-      template: `${paths.src}/templates/template.html`,
-      favicon: `${paths.src}/images/favicon.png`,
-      filename: 'index.html',
-    }),
     new CopyWebpackPlugin({
       patterns: [
         {

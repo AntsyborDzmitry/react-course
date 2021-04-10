@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Search from './search';
-import HeroMenu from './heroMenu';
+import SearchAsync from './searchAsync';
+import HeroMenuAsync from './heroMenuAsync';
 
 function heroContent(props) {
   const { visibility } = props;
 
   return (
     <div className={`hero-content ${visibility}`}>
-      <HeroMenu />
-      <Search />
+      <HeroMenuAsync />
+      <SearchAsync />
       <div className="concord-img-gradient" />
     </div>
   );

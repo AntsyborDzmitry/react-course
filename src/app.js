@@ -6,11 +6,11 @@ import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import './styles/libs/bootstrap-grid.min.css';
 import './styles/index.scss';
-import Header from './components/layout/header';
-import ContentComponent from './components/content/contentComponent';
-import Footer from './components/layout/footer';
-import Logo from './components/common/logo';
-import NoMatch from './components/pages/error';
+import HeaderAsync from './components/layout/headerAsync';
+import FooterAsync from './components/layout/footerAsync';
+import LogoAsync from './components/common/logoAsync';
+import NoMatchAsync from './components/pages/errorAsync';
+import ContentComponentAsync from './components/content/contentComponentAsync';
 
 function App({
   Router, location, context, store,
@@ -18,18 +18,18 @@ function App({
   return (
     <Provider store={store}>
       <Router location={location} context={context}>
-        <Header>
-          <Logo logoLink="my-test-site.com" />
-        </Header>
+        <HeaderAsync>
+          <LogoAsync logoLink="my-test-site.com" />
+        </HeaderAsync>
         <Switch>
           <Route exact path={['/', '/search query/', '/film/:id']}>
-            <ContentComponent />
+            <ContentComponentAsync />
           </Route>
-          <Route component={NoMatch} />
+          <Route component={NoMatchAsync} />
         </Switch>
-        <Footer>
-          <Logo logoLink="my-test-site.com" />
-        </Footer>
+        <FooterAsync>
+          <LogoAsync logoLink="my-test-site.com" />
+        </FooterAsync>
       </Router>
     </Provider>
   );
@@ -38,19 +38,12 @@ function App({
 export default App;
 
 App.propTypes = {
-  Router: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
+  Router: PropTypes.func.isRequired,
   location: PropTypes.string,
-  context: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  store: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  context: PropTypes.objectOf(PropTypes.object),
+  store: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+  }),
 };
 
 App.defaultProps = {

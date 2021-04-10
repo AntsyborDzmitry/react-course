@@ -1,13 +1,13 @@
 import React from 'react';
-import Hero from '../layout/hero';
-import HeroContent from './heroContent';
-import MovieDetails from './movieDetails';
+import HeroAsync from '../layout/heroAsync';
+import HeroContentAsync from './heroContentAsync';
+import MovieDetailsAsync from './movieDetailsAsync';
 
 export default function heroComponent() {
   return (
-    <Hero>
-      <HeroContent />
-      <MovieDetails />
-    </Hero>
+    <HeroAsync>
+      <HeroContentAsync />
+      <MovieDetailsAsync />
+    </HeroAsync>
   );
 }

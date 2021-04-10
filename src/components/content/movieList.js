@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
-import EditForm from './editMovie/editForm';
-import DeleteForm from './editMovie/deleteForm';
+import EditFormAsync from './editMovie/editFormAsync';
+import DeleteFormAsync from './editMovie/deleteFormAsync';
 import NoMovie from '../common/noMovie';
 import { searchMovies } from '../../redux/actions/actionCreators';
 
@@ -48,7 +48,7 @@ function movieList(props) {
       {
         visibleEditForm
         && (
-          <EditForm
+          <EditFormAsync
             id={editId}
             displayModal={setVisibleEditForm}
           />
@@ -57,7 +57,7 @@ function movieList(props) {
       {
         visibleDeleteForm
         && (
-          <DeleteForm
+          <DeleteFormAsync
             id={deleteId}
             displayModal={setVisibleDeleteForm}
           />

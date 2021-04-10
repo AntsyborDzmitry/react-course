@@ -1,7 +1,6 @@
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractCssChunksPlugin = require('extract-css-chunks-webpack-plugin');
 const paths = require('./paths');
 
 module.exports = {
@@ -20,7 +19,17 @@ module.exports = {
       },
       {
         test: /\.(scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          {
+            loader: ExtractCssChunksPlugin.loader,
+            options: {
+              hot: true,
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
@@ -29,6 +38,10 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin(),
+    new ExtractCssChunksPlugin({
+      filename: '[name].css',
+      chunkFilename: '[name].chunk.css',
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {

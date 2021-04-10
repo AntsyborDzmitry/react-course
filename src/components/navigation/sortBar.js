@@ -26,10 +26,11 @@ sortBar.propTypes = {
   filterKey: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  movies: state.movies,
-  filterKey: state.filterBy,
-});
+sortBar.propTypes = {
+  sortMovieList: PropTypes.func.isRequired,
+  filterKey: PropTypes.string,
+};
+
 const mapDispatchToProps = { sortMovieList: loadMovieList };
 
-export default connect(mapStateToProps, mapDispatchToProps)(sortBar);
+export default connect(null, mapDispatchToProps)(sortBar);

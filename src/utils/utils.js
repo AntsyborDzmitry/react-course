@@ -28,8 +28,19 @@ export function compareValues(key, order = 'asc') {
   };
 }
 
-export function buildGetMovieListURL(filterKey = '', sortKey = 'release_date') {
-  const params = `?sortBy=${sortKey}&sortOrder=desc&searchBy=genres&filter=${filterKey}&limit=20`;
+export function buildGetMovieListURL(filterKey = '', sortKey = '', getState) {
+  let filter = filterKey;
+  let sort = sortKey;
+
+  if (!filterKey) {
+    filter = getState().movie.filterBy;
+  }
+  filter = filter === 'all' ? '' : filter;
+
+  if (!sortKey) {
+    sort = getState().movie.sortBy || 'release_date';
+  }
+  const params = `?sortBy=${sort}&sortOrder=desc&searchBy=genres&filter=${filter}&limit=20`;
   return `${HOST}${URL}${params}`;
 }
 

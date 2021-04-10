@@ -1,0 +1,27 @@
+@import '../common/input';
+
+.hero {
+  width: 100%;
+  background-size: 100%;
+  background-image: url(/images/hero-bg.jpg);
+}
+
+.concord-img-gradient {
+  z-index: 1;
+  height: inherit;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.hero-content {
+  height: 300px;
+}
+
+.hero-content.movie-details-active {
+  position: absolute;
+  height: auto;
+  width: 100%;
+  z-index: 0;
+}

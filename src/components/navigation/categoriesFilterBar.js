@@ -48,10 +48,6 @@ categoriesFilterBar.propTypes = {
   sortKey: PropTypes.string,
 };
 
-const mapStateToProps = (state) => ({
-  movies: state.movies,
-  sortKey: state.sortedBy,
-});
 const mapDispatchToProps = { filterMovieList: loadMovieList };
 
-export default connect(mapStateToProps, mapDispatchToProps)(categoriesFilterBar);
+export default connect(null, mapDispatchToProps)(categoriesFilterBar);

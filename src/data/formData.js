@@ -42,6 +42,8 @@ export const addFormInitialValues = {
 
 export const getAddFormValidationSchema = (Yup) => Yup.object({
   title: Yup.string().required('Required'),
+  release_date: Yup.string().required('Required'),
+  genres: Yup.string().required('Required'),
   overview: Yup.string().required('Required'),
   poster_path: Yup.string().matches(/((https?):\/\/)/, 'Link should begin from https or http').required('Required'),
   runtime: Yup.number()

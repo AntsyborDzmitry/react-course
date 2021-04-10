@@ -1,51 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router, Route, Switch,
+} from 'react-router-dom';
 import './styles/libs/bootstrap-grid.min.css';
 import './styles/index.scss';
-
-import ErrorBoundary from './errorHandlers/errorBoundary';
 import Header from './components/layout/header';
-import HeaderContent from './components/header/headerContent';
-import MovieDetails from './components/header/movieDetails';
-import Content from './components/layout/content';
-import SearchResultNumber from './components/content/searchResultNumber';
-import Navigation from './components/navigation/navigation';
-import MovieList from './components/content/movieList';
+import ContentComponent from './components/content/contentComponent';
 import Footer from './components/layout/footer';
 import Logo from './components/common/logo';
+import NoMatch from './components/pages/error';
 
 function App() {
-  const errorMessage = 'Something went wrong.';
-  const [selectedMovie, setSelectedMovie] = useState({});
-  const [movieDetailsVisibility, setMovieDetailsVisibility] = useState('');
-
   return (
     <>
-      <ErrorBoundary errorMessage={errorMessage}>
+      <Router>
         <Header>
-          <HeaderContent movieDetailsVisibility={movieDetailsVisibility} />
-          <MovieDetails
-            selectedMovie={selectedMovie}
-            visibilityState={movieDetailsVisibility}
-            movieDetailsVisibilityHandler={setMovieDetailsVisibility}
-          />
+          <Logo logoLink="my-test-site.com" />
         </Header>
-      </ErrorBoundary>
-      <ErrorBoundary errorMessage={errorMessage}>
-        <Content>
-          <Navigation />
-          <SearchResultNumber />
-          <MovieList
-            setSelectedMovie={setSelectedMovie}
-            selectedMovie={selectedMovie}
-            movieDetailsVisibilityHandler={setMovieDetailsVisibility}
-          />
-        </Content>
-      </ErrorBoundary>
-      <ErrorBoundary errorMessage={errorMessage}>
+        <Switch>
+          <Route exact path={['/', '/search query/', '/film/:id']}>
+            <ContentComponent />
+          </Route>
+          <Route component={NoMatch} />
+        </Switch>
         <Footer>
           <Logo logoLink="my-test-site.com" />
         </Footer>
-      </ErrorBoundary>
+      </Router>
     </>
   );
 }

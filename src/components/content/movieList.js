@@ -1,31 +1,34 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
 import EditForm from './editMovie/editForm';
 import DeleteForm from './editMovie/deleteForm';
-import { loadMovieList } from '../../redux/actions/actionCreators';
+import NoMovie from '../common/noMovie';
+import { searchMovies } from '../../redux/actions/actionCreators';
 
 function movieList(props) {
   const {
-    movies, setSelectedMovie, selectedMovie, movieDetailsVisibilityHandler, setMovieList, pending,
+    movies, pending, findMovies,
   } = props;
   const [visibleEditForm, setVisibleEditForm] = useState(false);
   const [visibleDeleteForm, setVisibleDeleteForm] = useState(false);
+  const [prevSearch, setPrevSearch] = useState('');
   const editId = 'edit_movie';
   const deleteId = 'delete_movie';
+  const location = useLocation();
+  const searchParam = new URLSearchParams(location.search).get('search');
 
-  useEffect(() => {
-    setMovieList();
-  }, []);
-
+  if (searchParam && prevSearch !== searchParam) {
+    setPrevSearch(searchParam);
+    findMovies(searchParam);
+  }
   const itemsBuilder = (item) => (
     <MovieItem
       key={item.id}
       movie={item}
-      setSelectedMovie={setSelectedMovie}
-      movieDetailsVisibilityHandler={movieDetailsVisibilityHandler}
     >
       <EditMovie
         setVisibleEditForm={setVisibleEditForm}
@@ -40,14 +43,13 @@ function movieList(props) {
     <div className="movie-list">
       {pending && <div className="loader" />}
       <div className="row">
-        {items}
+        {(items.length && items) || (<NoMovie />)}
       </div>
       {
         visibleEditForm
         && (
           <EditForm
             id={editId}
-            selectedMovie={selectedMovie}
             displayModal={setVisibleEditForm}
           />
         )
@@ -57,7 +59,6 @@ function movieList(props) {
         && (
           <DeleteForm
             id={deleteId}
-            selectedMovie={selectedMovie}
             displayModal={setVisibleDeleteForm}
           />
         )
@@ -91,12 +92,15 @@ movieList.propTypes = {
     vote_average: PropTypes.number,
   }),
   movieDetailsVisibilityHandler: PropTypes.func,
-  setMovieList: PropTypes.func,
+};
+
+movieList.defaultProps = {
+  movies: [],
 };
 
 const mapStateToProps = (state) => (
-  { movies: state.movies, pending: state.pending }
+  { movies: state.movie.movies, pending: state.movie.pending }
 );
 
-const mapDispatchToProps = { setMovieList: loadMovieList };
+const mapDispatchToProps = { findMovies: searchMovies };
 export default connect(mapStateToProps, mapDispatchToProps)(movieList);

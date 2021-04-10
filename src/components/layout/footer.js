@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/layout/footer.scss';
+import ErrorBoundary from '../../errorHandlers/errorBoundary';
+import { BOUNDARY_ERROR_MESSAGE } from '../../data/constant';
 
 export default function footer(props) {
   const { children } = props;
   return (
-    <div className="footer">
-      {children}
-    </div>
+    <ErrorBoundary errorMessage={BOUNDARY_ERROR_MESSAGE}>
+      <div className="footer">
+        {children}
+      </div>
+    </ErrorBoundary>
   );
 }
 

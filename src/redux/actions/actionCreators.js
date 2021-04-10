@@ -14,7 +14,7 @@ function addMovie(data) {
       }
       return {};
     }).then((result) => {
-      const moviesCopy = [...getState().movies];
+      const moviesCopy = [...getState().movie.movies];
       moviesCopy.unshift(result);
       dispatch({ type: actionType.ADD_MOVIE, payload: moviesCopy });
     });
@@ -26,7 +26,7 @@ function deleteMovie(movieId) {
     const response = doDeleteApiCall(`${HOST}${URL}/${movieId}`);
     response.then((res) => {
       if (res && res.ok) {
-        const updatedMoviesCopy = getState().movies.filter((el) => el.id !== movieId);
+        const updatedMoviesCopy = getState().movie.movies.filter((el) => el.id !== movieId);
         dispatch({ type: actionType.DELETE_MOVIE, payload: updatedMoviesCopy });
       }
     });
@@ -48,7 +48,7 @@ function editMovie(data) {
     const response = doPutApiCall(`${HOST}${URL}`, data);
     response.then((res) => {
       if (res && res.ok) {
-        const moviesCopy = [...getState().movies];
+        const moviesCopy = [...getState().movie.movies];
         const editedMoviesCopy = replaceEditedMovie(moviesCopy, data);
         dispatch({ type: actionType.EDIT_MOVIE, payload: editedMoviesCopy });
       }
@@ -57,8 +57,8 @@ function editMovie(data) {
 }
 
 function loadMovieList(filterKey, sortKey, action = actionType.GET_MOVIE_LIST) {
-  const url = buildGetMovieListURL(filterKey, sortKey);
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const url = buildGetMovieListURL(filterKey, sortKey, getState);
     dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
     const response = doGetApiCall(url);
     response.then(
@@ -68,6 +68,27 @@ function loadMovieList(filterKey, sortKey, action = actionType.GET_MOVIE_LIST) {
             {
               type: action,
               payload: { data: data.data, filterKey, sortKey },
+            },
+          );
+        }
+        dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
+      },
+    );
+  };
+}
+
+function searchMovies(searchKey, action = actionType.SEARCH_MOVIES) {
+  const url = `${HOST}${URL}?search=${searchKey}&searchBy=title`;
+  return (dispatch) => {
+    dispatch({ type: actionType.GET_MOVIE_LIST_PENDING, payload: false });
+    const response = doGetApiCall(url);
+    response.then(
+      (data) => {
+        if (data?.data) {
+          dispatch(
+            {
+              type: action,
+              payload: { data: data.data },
             },
           );
         }
@@ -89,5 +110,5 @@ function sortMovieListBy(movieList, key) {
 }
 
 export {
-  loadMovieList, addMovie, deleteMovie, editMovie, sortMovieListBy,
+  loadMovieList, searchMovies, addMovie, deleteMovie, editMovie, sortMovieListBy,
 };

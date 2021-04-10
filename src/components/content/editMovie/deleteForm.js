@@ -43,5 +43,5 @@ deleteForm.propTypes = {
 };
 
 const mapDispatchToProps = { deleteMovieHandler: deleteMovie };
-
-export default connect(null, mapDispatchToProps)(deleteForm);
+const mapStateToProps = (state) => ({ selectedMovie: state.movieDetails.selectedMovie });
+export default connect(mapStateToProps, mapDispatchToProps)(deleteForm);

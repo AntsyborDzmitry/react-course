@@ -1,18 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getYearFromReleaseDate } from '../../utils/utils';
+import { SHOW_MOVIE_DETAILS, SET_SELECTED_MOVIE } from '../../redux/actions/actionTypes';
 import '../../styles/content/movieItem.scss';
 
-export default function movieItem(props) {
+function movieItem(props) {
   const {
     movie, setSelectedMovie, movieDetailsVisibilityHandler, children,
   } = props;
-
+  const history = useHistory();
   const setSelectedMovieAndShow = (e) => {
     setSelectedMovie(movie);
     if (e.target?.classList.contains('movie__img')) {
-      movieDetailsVisibilityHandler('movie-details-active');
+      movieDetailsVisibilityHandler();
     }
+    history.push(`/film/${movie.id}`);
   };
 
   return (
@@ -45,3 +49,9 @@ movieItem.propTypes = {
     PropTypes.node,
   ]),
 };
+
+const mapDispatchToProps = {
+  movieDetailsVisibilityHandler: () => ({ type: SHOW_MOVIE_DETAILS, payload: 'movie-details-active' }),
+  setSelectedMovie: (movie) => ({ type: SET_SELECTED_MOVIE, payload: movie }),
+};
+export default connect(null, mapDispatchToProps)(movieItem);

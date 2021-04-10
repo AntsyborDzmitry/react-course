@@ -110,5 +110,5 @@ editForm.propTypes = {
 };
 
 const mapDispatchToProps = { editMovieHandler: editMovie };
-
-export default connect(null, mapDispatchToProps)(editForm);
+const mapStateToProps = (state) => ({ selectedMovie: state.movieDetails.selectedMovie });
+export default connect(mapStateToProps, mapDispatchToProps)(editForm);

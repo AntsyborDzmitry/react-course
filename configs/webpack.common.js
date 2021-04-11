@@ -48,6 +48,10 @@ module.exports = {
           from: `${paths.src}/images`,
           to: 'images',
         },
+        {
+          from: `${paths.src}/seo`,
+          to: '',
+        },
       ],
     }),
   ],

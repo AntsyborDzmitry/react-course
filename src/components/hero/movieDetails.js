@@ -25,7 +25,7 @@ function movieDetails(props) {
           <SearchIconElement clickListener={hideDetails} />
         </div>
         <div className="movie-details-content">
-          <img src={selectedMovie.poster_path} alt={selectedMovie.title} />
+          <img src={selectedMovie.poster_path} width="200px" height="298px" alt={selectedMovie.title} />
           <div className="details">
             <div className="title">
               {selectedMovie.title}

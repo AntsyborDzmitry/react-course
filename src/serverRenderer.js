@@ -15,17 +15,18 @@ function renderHTML(html, preloadedState, bundles) {
 
   return `
     <!doctype html>
-    <html>
+    <html lang="en">
       <head>
         <meta charset=utf-8>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="React training page.">
         <title>React Server Side Rendering</title>
+        <link rel="preload" as="image" href="/images/hero-bg.jpg">
         ${styles.map((style) => (`<link href="/${style.file}" rel="stylesheet" />`)).join('\n')}
       </head>
       <body>
         <div id="root">${html}</div>
         <script>
-          // WARNING: See the following for security issues around embedding JSON in HTML:
-          // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
           window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
         ${scripts.map((script) => (`<script src="/${script.file}"></script>`)).join('\n')}

@@ -22,7 +22,7 @@ function movieItem(props) {
   return (
     <div className="col-6 col-sm-4 col-md-3" onClick={setSelectedMovieAndShow}>
       {children}
-      <img src={movie.poster_path} className="movie__img" alt={movie.title} />
+      <img src={movie.poster_path} className="movie__img" width="315px" height="470px" alt={movie.title} />
       <div id={movie.id} className="movie-info">
         <div className="main-info">
           <span className="title">{movie.title}</span>

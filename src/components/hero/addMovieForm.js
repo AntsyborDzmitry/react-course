@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
@@ -12,12 +12,13 @@ import { addMovie } from '../../redux/actions/actionCreators';
 import { GENRE_OPTIONS } from '../../data/constant';
 import { getSerializedFormData } from '../../utils/utils';
 
-function addMovieForm(props) {
-  const { id, addMovieHandler, displayModal } = props;
+export default function addMovieForm(props) {
+  const { id, displayModal } = props;
 
+  const dispatch = useDispatch();
   const onSubmit = (values) => {
     const serializedData = getSerializedFormData(values);
-    addMovieHandler(serializedData);
+    dispatch(addMovie(serializedData));
     displayModal(false);
   };
 
@@ -88,9 +89,5 @@ function addMovieForm(props) {
 
 addMovieForm.propTypes = {
   id: PropTypes.string.isRequired,
-  addMovieHandler: PropTypes.func,
+  displayModal: PropTypes.bool,
 };
-
-const mapDispatchToProps = { addMovieHandler: addMovie };
-
-export default connect(null, mapDispatchToProps)(addMovieForm);

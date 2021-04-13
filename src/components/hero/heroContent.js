@@ -1,12 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import SearchAsync from './searchAsync';
 import HeroMenuAsync from './heroMenuAsync';
 
-function heroContent(props) {
-  const { visibility } = props;
-
+export default function heroContent() {
+  const visibility = useSelector((state) => state.movieDetails.visibility);
   return (
     <div className={`hero-content ${visibility}`}>
       <HeroMenuAsync />
@@ -15,11 +13,3 @@ function heroContent(props) {
     </div>
   );
 }
-
-heroContent.propTypes = {
-  visibility: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({ visibility: state.movieDetails.visibility });
-
-export default connect(mapStateToProps, null)(heroContent);

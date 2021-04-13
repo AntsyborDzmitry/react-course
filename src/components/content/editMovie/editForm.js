@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Formik, Form, Field, ErrorMessage,
 } from 'formik';
@@ -12,14 +12,14 @@ import { GENRE_OPTIONS } from '../../../data/constant';
 import { editMovie } from '../../../redux/actions/actionCreators';
 import { getSerializedFormData } from '../../../utils/utils';
 
-function editForm(props) {
-  const {
-    id, editMovieHandler, selectedMovie, displayModal,
-  } = props;
+export default function editForm(props) {
+  const { id, displayModal } = props;
+  const dispatch = useDispatch();
+  const selectedMovie = useSelector((state) => state.movieDetails.selectedMovie);
 
   const onSubmit = (values) => {
     const serializedData = getSerializedFormData(values);
-    editMovieHandler(serializedData);
+    dispatch(editMovie(serializedData));
     displayModal(false);
   };
 
@@ -96,19 +96,5 @@ function editForm(props) {
 
 editForm.propTypes = {
   id: PropTypes.string.isRequired,
-  editMovieHandler: PropTypes.func,
-  selectedMovie: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.string,
-    tagline: PropTypes.string,
-    runtime: PropTypes.number,
-    overview: PropTypes.string,
-    vote_average: PropTypes.number,
-  }),
+  displayModal: PropTypes.bool,
 };
-
-const mapDispatchToProps = { editMovieHandler: editMovie };
-const mapStateToProps = (state) => ({ selectedMovie: state.movieDetails.selectedMovie });
-export default connect(mapStateToProps, mapDispatchToProps)(editForm);

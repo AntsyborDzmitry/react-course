@@ -1,21 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import SearchIconElement from '../common/searchIconElement';
 import { getYearFromReleaseDate } from '../../utils/utils';
 import { SHOW_MOVIE_DETAILS } from '../../redux/actions/actionTypes';
 import '../../styles/hero/movieDetails.scss';
 import '../../styles/common/searchIconElement.scss';
 
-function movieDetails(props) {
-  const {
-    selectedMovie,
-    visibility,
-    movieDetailsVisibilityHandler,
-  } = props;
+export default function movieDetails() {
+  const dispatch = useDispatch();
+  const visibility = useSelector((state) => state.movieDetails.visibility);
+  const selectedMovie = useSelector((state) => state.movieDetails.selectedMovie);
 
   const hideDetails = () => {
-    movieDetailsVisibilityHandler();
+    dispatch({ type: SHOW_MOVIE_DETAILS, payload: '' });
   };
 
   return (
@@ -47,25 +44,3 @@ function movieDetails(props) {
     </>
   );
 }
-
-movieDetails.propTypes = {
-  selectedMovie: PropTypes.shape({
-    title: PropTypes.string,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.string,
-    tagline: PropTypes.string,
-    runtime: PropTypes.number,
-    overview: PropTypes.string,
-    vote_average: PropTypes.number,
-  }),
-  visibility: PropTypes.string,
-  movieDetailsVisibilityHandler: PropTypes.func,
-};
-
-const mapStateToProps = (state) => ({
-  visibility: state.movieDetails.visibility,
-  selectedMovie: state.movieDetails.selectedMovie,
-});
-
-const mapDispatchToProps = { movieDetailsVisibilityHandler: () => ({ type: SHOW_MOVIE_DETAILS, payload: '' }) };
-export default connect(mapStateToProps, mapDispatchToProps)(movieDetails);

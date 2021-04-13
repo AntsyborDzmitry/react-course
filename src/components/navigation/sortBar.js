@@ -1,16 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import DropDown from './dropDown';
 import { loadMovieList } from '../../redux/actions/actionCreators';
 import { SORT_OPTIONS } from '../../data/constant';
 import { SORT_MOVIE_BY } from '../../redux/actions/actionTypes';
 import '../../styles/navigation/sortBar.scss';
 
-function sortBar(props) {
-  const { sortMovieList, filterKey } = props;
+export default function sortBar(props) {
+  const { filterKey } = props;
+  const dispatch = useDispatch();
   const doSorting = (sortKey) => {
-    sortMovieList(filterKey, sortKey, SORT_MOVIE_BY);
+    dispatch(loadMovieList(filterKey, sortKey, SORT_MOVIE_BY));
   };
 
   return (
@@ -20,17 +20,3 @@ function sortBar(props) {
     </div>
   );
 }
-
-sortBar.propTypes = {
-  sortMovieList: PropTypes.func,
-  filterKey: PropTypes.string,
-};
-
-sortBar.propTypes = {
-  sortMovieList: PropTypes.func.isRequired,
-  filterKey: PropTypes.string,
-};
-
-const mapDispatchToProps = { sortMovieList: loadMovieList };
-
-export default connect(null, mapDispatchToProps)(sortBar);

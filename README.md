@@ -19,7 +19,7 @@ npm i
 npm run build
 ```
 
-You can open the development server at `localhost:3000`.
+You can open the development server at `localhost:8000`.
 
 ### run server
 

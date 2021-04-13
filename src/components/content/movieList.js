@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import MovieItem from './movieItem';
 import EditMovie from './editMovie/editMovie';
 import EditFormAsync from './editMovie/editFormAsync';
@@ -9,10 +8,10 @@ import DeleteFormAsync from './editMovie/deleteFormAsync';
 import NoMovie from '../common/noMovie';
 import { searchMovies } from '../../redux/actions/actionCreators';
 
-function movieList(props) {
-  const {
-    movies, pending, findMovies,
-  } = props;
+export default function movieList() {
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movie.movies);
+  const pending = useSelector((state) => state.movie.pending);
   const [visibleEditForm, setVisibleEditForm] = useState(false);
   const [visibleDeleteForm, setVisibleDeleteForm] = useState(false);
   const [prevSearch, setPrevSearch] = useState('');
@@ -23,7 +22,7 @@ function movieList(props) {
 
   if (searchParam && prevSearch !== searchParam) {
     setPrevSearch(searchParam);
-    findMovies(searchParam);
+    dispatch(searchMovies(searchParam));
   }
   const itemsBuilder = (item) => (
     <MovieItem
@@ -73,41 +72,3 @@ movieList.ssrInit = (searchParam) => {
   }
   return {};
 };
-
-movieList.propTypes = {
-  movies: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string,
-      poster_path: PropTypes.string,
-      release_date: PropTypes.string,
-      tagline: PropTypes.string,
-      runtime: PropTypes.number,
-      overview: PropTypes.string,
-      vote_average: PropTypes.number,
-    }),
-  ),
-  setSelectedMovie: PropTypes.func,
-  selectedMovie: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.string,
-    tagline: PropTypes.string,
-    runtime: PropTypes.number,
-    overview: PropTypes.string,
-    vote_average: PropTypes.number,
-  }),
-  movieDetailsVisibilityHandler: PropTypes.func,
-};
-
-movieList.defaultProps = {
-  movies: [],
-};
-
-const mapStateToProps = (state) => (
-  { movies: state.movie.movies, pending: state.movie.pending }
-);
-
-const mapDispatchToProps = { findMovies: searchMovies };
-export default connect(mapStateToProps, mapDispatchToProps)(movieList);

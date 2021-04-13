@@ -1,17 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from '../../common/button';
 import Modal from '../../common/modal';
 import { deleteMovie } from '../../../redux/actions/actionCreators';
 
-function deleteForm(props) {
-  const {
-    id, deleteMovieHandler, selectedMovie, displayModal,
-  } = props;
+export default function deleteForm(props) {
+  const { id, displayModal } = props;
+  const dispatch = useDispatch();
+  const selectedMovie = useSelector((state) => state.movieDetails.selectedMovie);
+
   const doSubmit = (e) => {
     e.preventDefault();
-    deleteMovieHandler(selectedMovie.id);
+    dispatch(deleteMovie(selectedMovie.id));
     displayModal(false);
   };
 
@@ -29,19 +30,5 @@ function deleteForm(props) {
 
 deleteForm.propTypes = {
   id: PropTypes.string.isRequired,
-  deleteMovieHandler: PropTypes.func,
-  selectedMovie: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    poster_path: PropTypes.string,
-    release_date: PropTypes.string,
-    tagline: PropTypes.string,
-    runtime: PropTypes.number,
-    overview: PropTypes.string,
-    vote_average: PropTypes.number,
-  }),
+  displayModal: PropTypes.bool,
 };
-
-const mapDispatchToProps = { deleteMovieHandler: deleteMovie };
-const mapStateToProps = (state) => ({ selectedMovie: state.movieDetails.selectedMovie });
-export default connect(mapStateToProps, mapDispatchToProps)(deleteForm);

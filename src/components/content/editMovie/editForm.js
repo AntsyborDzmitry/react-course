@@ -96,5 +96,5 @@ export default function editForm(props) {
 
 editForm.propTypes = {
   id: PropTypes.string.isRequired,
-  displayModal: PropTypes.bool,
+  displayModal: PropTypes.func,
 };

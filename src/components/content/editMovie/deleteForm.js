@@ -30,5 +30,5 @@ export default function deleteForm(props) {
 
 deleteForm.propTypes = {
   id: PropTypes.string.isRequired,
-  displayModal: PropTypes.bool,
+  displayModal: PropTypes.func,
 };

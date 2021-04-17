@@ -89,5 +89,5 @@ export default function addMovieForm(props) {
 
 addMovieForm.propTypes = {
   id: PropTypes.string.isRequired,
-  displayModal: PropTypes.bool,
+  displayModal: PropTypes.func,
 };

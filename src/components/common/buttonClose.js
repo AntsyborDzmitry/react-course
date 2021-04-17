@@ -1,7 +1,11 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export default function buttonClose(props) {
+type buttonCloseProps = {
+    clickListener: Function;
+}
+
+function buttonClose(props: buttonCloseProps): any {
   const {
     clickListener,
   } = props;
@@ -12,7 +16,4 @@ export default function buttonClose(props) {
     </button>
   );
 }
-
-buttonClose.propTypes = {
-  clickListener: PropTypes.func,
-};
+export default React.memo(buttonClose);

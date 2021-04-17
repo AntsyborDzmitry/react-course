@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/common/logo.scss';
 
-export default function logo(props) {
+function logo(props) {
   const { logoLink } = props;
 
   return (
@@ -14,6 +14,8 @@ export default function logo(props) {
     </div>
   );
 }
+
+export default React.memo(logo);
 
 logo.propTypes = {
   logoLink: PropTypes.string.isRequired,

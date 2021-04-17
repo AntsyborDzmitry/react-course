@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/navigation/dropDown.scss';
 
-export default function dropDown(props) {
+function dropDown(props) {
   const { options, sortMovieHandler } = props;
   const [openDropDownState, setOpenDropDownState] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
@@ -55,6 +55,8 @@ export default function dropDown(props) {
     </div>
   );
 }
+
+export default React.memo(dropDown);
 
 dropDown.propTypes = {
   options: PropTypes.arrayOf(

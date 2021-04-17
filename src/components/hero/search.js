@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Button from '../common/button';
 import '../../styles/hero/search.scss';
 
-export default function search() {
+function search() {
   const [input, setInput] = useState('');
   const history = useHistory();
 
@@ -25,3 +25,5 @@ export default function search() {
     </div>
   );
 }
+
+export default React.memo(search);

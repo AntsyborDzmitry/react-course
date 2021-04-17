@@ -1,8 +1,15 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import '../../styles/common/button.scss';
 
-export default function button(props) {
+type buttonProps = {
+    cssClass: number;
+    type: string;
+    title: string;
+    clickListener: Function;
+}
+
+function button(props: buttonProps): any {
   const {
     cssClass,
     type,
@@ -17,13 +24,4 @@ export default function button(props) {
   );
 }
 
-button.propTypes = {
-  cssClass: PropTypes.string,
-  type: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  clickListener: PropTypes.func,
-};
-
-button.defaultProps = {
-  type: 'button',
-};
+export default React.memo(button);

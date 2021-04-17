@@ -6,7 +6,7 @@ import FilterItem from './filterItem';
 import { FILTER_MOVIE_BY } from '../../redux/actions/actionTypes';
 import '../../styles/navigation/categoriesFilterBar.scss';
 
-export default function categoriesFilterBar(props) {
+function categoriesFilterBar(props) {
   const { categories, sortKey } = props;
   const dispatch = useDispatch();
   const doFiltering = (filterKey) => {
@@ -42,6 +42,7 @@ export default function categoriesFilterBar(props) {
     </div>
   );
 }
+export default React.memo(categoriesFilterBar);
 
 categoriesFilterBar.propTypes = {
   categories: PropTypes.instanceOf(Array).isRequired,

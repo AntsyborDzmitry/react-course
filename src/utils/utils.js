@@ -1,6 +1,37 @@
+// @flow
 import { HOST, URL } from '../data/constant';
 
-export function getYearFromReleaseDate(releaseDate) {
+type formDataInput = {
+    budget: number;
+    genres: string;
+    overview: string;
+    poster_path: string;
+    release_date: string;
+    revenue: number;
+    runtime: number;
+    tagline: string;
+    title: string;
+    vote_count: number;
+    vote_average: number;
+    id?: number;
+}
+
+type formDataReturn = {
+    budget: number;
+    genres: Array<string>;
+    overview: string;
+    poster_path: string;
+    release_date: string;
+    revenue: number;
+    runtime: number;
+    tagline: string;
+    title: string;
+    vote_count: number;
+    vote_average: number;
+    id?: number;
+}
+
+export function getYearFromReleaseDate(releaseDate: string): number {
   return releaseDate?.length > 4 ? releaseDate.substr(0, 4) : releaseDate;
 }
 
@@ -20,12 +51,12 @@ export function buildGetMovieListURL(filterKey = '', sortKey = '', getState) {
   return `${HOST}${URL}${params}`;
 }
 
-function parseNumberValueOrDefault(value, defaultValue) {
+function parseNumberValueOrDefault(value: number, defaultValue: number): number {
   const parsedValue = parseFloat(value, 10);
   return Number.isFinite(parsedValue) ? parsedValue : defaultValue;
 }
 
-export function getSerializedFormData(formData) {
+export function getSerializedFormData(formData: formDataInput): formDataReturn {
   const serializedData = formData;
   serializedData.genres = [serializedData.genres];
   if (!serializedData.tagline) {

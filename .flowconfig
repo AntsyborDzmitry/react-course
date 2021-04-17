@@ -1,0 +1,22 @@
+[ignore]
+  .*/.idea/*
+  .*/node_modules/*
+  .*/dist/*
+  .*/src/styles/*
+  .*/src/test-coverage/*
+  .*/test-coverage/*
+  .*/coverage/*
+  .*/target/*
+  .*/.git/.*
+
+[include]
+  .*/src/
+[libs]
+
+[lints]
+
+[options]
+  module.file_ext=.scss
+  module.name_mapper='.*\(.s?css\)' -> 'empty/object'
+
+[strict]

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import '../../../styles/content/editMovie/editMenu.scss';
 
-export default function editMenu(props) {
+function editMenu(props) {
   const {
     editMenuCssClass,
     showEditMenu,
@@ -39,6 +39,8 @@ export default function editMenu(props) {
     </div>
   );
 }
+
+export default React.memo(editMenu);
 
 editMenu.propTypes = {
   editMenuCssClass: PropTypes.string.isRequired,

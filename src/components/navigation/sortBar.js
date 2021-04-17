@@ -6,7 +6,7 @@ import { SORT_OPTIONS } from '../../data/constant';
 import { SORT_MOVIE_BY } from '../../redux/actions/actionTypes';
 import '../../styles/navigation/sortBar.scss';
 
-export default function sortBar(props) {
+function sortBar(props) {
   const { filterKey } = props;
   const dispatch = useDispatch();
   const doSorting = (sortKey) => {
@@ -20,3 +20,5 @@ export default function sortBar(props) {
     </div>
   );
 }
+
+export default React.memo(sortBar);

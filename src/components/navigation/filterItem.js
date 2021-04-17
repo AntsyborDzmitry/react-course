@@ -1,7 +1,14 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export default function filterItem(props) {
+type filterItemProps = {
+    category: string;
+    activityStatus: string;
+    doFiltering: Function;
+    dataKey: string;
+}
+
+export default function filterItem(props: filterItemProps): any {
   const {
     category,
     activityStatus,
@@ -19,10 +26,3 @@ export default function filterItem(props) {
     </>
   );
 }
-
-filterItem.propTypes = {
-  activityStatus: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  dataKey: PropTypes.string.isRequired,
-  doFiltering: PropTypes.func.isRequired,
-};

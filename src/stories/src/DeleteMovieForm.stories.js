@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { action } from "@storybook/addon-actions";
+import { action } from '@storybook/addon-actions';
 import DeleteForm from '../../components/content/editMovie/deleteForm';
 import configureStore from '../../redux/configureStore';
 
@@ -13,14 +13,18 @@ export default {
       type: { name: 'string', required: true },
       defaultValue: '',
     },
-  }
+  },
 };
 
 const store = configureStore({});
-const Template = (args) => <Provider store={store}> <DeleteForm {...args} /> </Provider>;
+const Template = (args) => (
+  <Provider store={store}>
+    <DeleteForm {...args} />
+  </Provider>
+);
 
 export const form = Template.bind({});
 form.args = {
   id: 'delete_movie',
-  displayModal: action("Button is clicked!")
+  displayModal: action('Button is clicked!'),
 };

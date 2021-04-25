@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { action } from "@storybook/addon-actions";
+import { action } from '@storybook/addon-actions';
 import EditMenu from '../../components/content/editMovie/editMenu';
 import configureStore from '../../redux/configureStore';
 
@@ -13,15 +13,19 @@ export default {
       type: { name: 'string', required: false },
       defaultValue: '',
     },
-  }
+  },
 };
 
 const store = configureStore({});
-const Template = (args) => <Provider store={store}> <EditMenu {...args} /> </Provider>;
+const Template = (args) => (
+  <Provider store={store}>
+    <EditMenu {...args} />
+  </Provider>
+);
 
 export const menu = Template.bind({});
 menu.args = {
   editMenuCssClass: '',
-  setVisibleEditForm: action("Edit is clicked!"),
-  setVisibleDeleteForm: action("Delete is clicked!"),
+  setVisibleEditForm: action('Edit is clicked!'),
+  setVisibleDeleteForm: action('Delete is clicked!'),
 };

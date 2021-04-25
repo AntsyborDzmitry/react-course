@@ -10,7 +10,7 @@ export default {
       type: { name: 'string', required: true },
       defaultValue: '',
     },
-  }
+  },
 };
 
 const Template = (args) => <Logo {...args} />;
